@@ -1,5 +1,6 @@
 import React from "react";
-import { FormRow, ProfileIcon } from "../../component";
+import { AllPosts, FormRow, ProfileIcon } from "../../component";
+import TrendingSidebar from "../../component/TrendingSidebar";
 import Wrapper from "../../css/wrapper/Feed";
 
 export const Feed = () => {
@@ -29,12 +30,13 @@ export const Feed = () => {
 
           </div> */}
 
-            <hr />
-          <div className="all-posts">
-            cards
-          </div>
+            <hr className="hr"/>
+
+            <AllPosts/>
         </div>
-        <div className="left-sidebar">left sidebar</div>
+        <div className="trending-sidebar">
+          <TrendingSidebar/>
+        </div>
       </div>
     </Wrapper>
   );
