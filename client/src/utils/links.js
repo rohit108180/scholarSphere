@@ -13,13 +13,13 @@ export const links = [
     {
         id :2,
         text:'Post',
-        path :'all-jobs',
+        path :'post',
         icon : <MdQueryStats/>
     },
     {
         id :3,
         text:'notification',
-        path :'add-job',
+        path :'',
         icon : <FaWpforms/>
     },
     {
