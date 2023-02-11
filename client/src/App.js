@@ -3,7 +3,7 @@ import { Landing } from './pages/Landing';
 import {BrowserRouter, Routes, Route, Link  } from "react-router-dom";
 import {Error, ProtectedRoute, Register } from './pages';
 import { AppProvider } from './context/appContext';
-import { Stats, AllJobs, AddJob, Profile , SharedLayer} from './pages/dashboard/index';
+import { Profile , SharedLayer, AddProjectPaper, Feed} from './pages/dashboard/index';
 
 
 
@@ -16,9 +16,8 @@ function App() {
     <BrowserRouter >
       <Routes>
         <Route path="/" element={<ProtectedRoute><SharedLayer/></ProtectedRoute>}>
-          <Route index element={<Stats/>} />
-          <Route path='all-jobs' element={<AllJobs/>} />
-          <Route path='add-job' element={<AddJob/>} />
+          <Route index element={<Feed/>} />
+          <Route path='post' element={<AddProjectPaper/>} />
           <Route path='profile' element={<Profile/>} />
         </Route>
         <Route path = "/register" element={<Register/>}/>

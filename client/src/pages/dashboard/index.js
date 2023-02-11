@@ -1,7 +1,8 @@
-import { AddJob } from "./AddJob";
-import { AllJobs } from "./AllJobs";
 import { Profile } from "./Profile";
 import { SharedLayer } from "./SharedLayer";
-import { Stats } from "./Stats";
+import {AddProjectPaper} from "./AddProjectPaper"
+import {Feed} from "./Feed"
 
-export {AllJobs,Profile, Stats,AddJob, SharedLayer};
+
+
+export {Profile, SharedLayer, Feed, AddProjectPaper};
