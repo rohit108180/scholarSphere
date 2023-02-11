@@ -16,6 +16,7 @@ const Wrapper = styled.main`
             margin-right: 2rem;
         }
         background-color: var(--white);
+        border-radius: 10px;
         padding: 2rem;
     }
     .user-info {
@@ -33,12 +34,24 @@ const Wrapper = styled.main`
         background-color: var(--white);
         .button-group{
             margin-bottom: 2rem;
+            color: red !important;
             .button{
                 background-color: white;
                 border: none;
                 padding: 1rem;
             }
         }
+        border-radius: 10px;
+
+    }
+    .research {
+        width: 100%;
+    }
+    .projects {
+        width: 100%;
+    }
+    .bookmarks {
+        width: 100%;
     }
     
 

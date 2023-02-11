@@ -1,10 +1,17 @@
 import React from 'react'
 import { FormRow, ProfileIcon } from "../../component";
 import Wrapper from "../../css/wrapper/Profile";
-
+import ToggleButton from '@mui/material/ToggleButton';
+import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
 
 
 export const Profile = () => {
+  const [alignment, setAlignment] = React.useState('research');
+  let information;
+  const handleChange = (event, newAlignment) => {
+    setAlignment(newAlignment);
+  };
+
   return (
     <Wrapper>
       <div class="main">
@@ -35,23 +42,41 @@ export const Profile = () => {
 
       <div class="main-2">
         <div class="button-group">
-          <button class="button">
-            Research
-          </button>
-          <button class="button">
-            Projects
-          </button>
+          <ToggleButtonGroup
+            // color="primary"
+            value={alignment}
+            exclusive
+            onChange={handleChange}
+            aria-label="Platform"
+          >
+            <ToggleButton style={{border: 'none', background: 'none', color: '#2cb1bc', fontWeight:'bold'}} value="research">Research</ToggleButton>
+            <ToggleButton style={{border: 'none', background: 'none', color: '#2cb1bc', fontWeight:'bold'}} value="projects">Projects</ToggleButton>
+            <ToggleButton style={{border: 'none', background: 'none', color: '#2cb1bc', fontWeight:'bold'}} value="bookmarks">Bookmarks</ToggleButton>
+          </ToggleButtonGroup>
         </div>
       </div>
-      <div class="research">
-        research
-      </div>
-      <div class="projects"  style={{display: 'none'}}>
-        projects
-      </div>
-      <div class="bookmarks"  style={{display: 'none'}}>
-        bookmarks
-      </div>
+
+      
+      {
+        alignment === "research" ? 
+        (
+          <div class="research">
+            Research
+          </div>
+        ) : 
+        (alignment === "projects") ? (
+          <div class="projects">
+            Projects
+          </div>
+        ) : (
+          <div class="bookmarks">
+            Bookmarks
+          </div>
+        )
+      }
+      
+      
+      
     </Wrapper>
   )
 }
