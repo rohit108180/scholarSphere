@@ -1,0 +1,7 @@
+export const SHOW_ALERT = "SHOW_ALERT";
+export const CLEAR_ALERT = "CLEAR_ALERT";
+export const LOGOUT = 'LOGOUT';
+export const SETUP_USER_BEGINS = "SETUP_USER_BEGINS";
+export const SETUP_USER_SUCCESS = "SETUP_USER_SUCCESS";
+export const SETUP_USER_ERROR = "SETUP_USER_ERROR";
+export const TOGGLE_SIDEBAR = "TOGGLE_SIDEBAR";
