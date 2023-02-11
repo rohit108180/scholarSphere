@@ -8,6 +8,20 @@ export const AddProjectPaper = () => {
     setCurrentView(currentView === "project" ? "research" : "project");
   };
 
+  const [research, setResearch] = useState({
+    title: "",
+    description: "",
+    authors: "",
+    gs_link: "",
+    field: "",
+  });
+
+  const handleChangeresearch = (event) => {
+    setResearch({
+      ...research,
+      [event.target.name]: event.target.value,
+    });
+  };
   const [project, setProject] = useState({
     title: "",
     description: "",
@@ -85,7 +99,7 @@ export const AddProjectPaper = () => {
                 />
               </label>
               <label>
-                Deployd Link
+                Deployed Link
                 <input
                   type="text"
                   name="dlink"
@@ -107,7 +121,59 @@ export const AddProjectPaper = () => {
             </form>
           </div>
         ) : (
-          <div>View 2</div>
+          <div>
+            <form onSubmit={handleSubmit}>
+              <h4>
+                <b>RESEARCH</b>
+              </h4>
+              <label>
+                Title
+                <input
+                  type="text"
+                  name="title"
+                  value={project.title}
+                  onChange={handleChange}
+                />
+              </label>
+              <label>
+                Description
+                <textarea
+                  name="description"
+                  value={project.description}
+                  onChange={handleChange}
+                />
+              </label>
+              <label>
+                Authors
+                <input
+                  type="text"
+                  name="authors"
+                  value={project.authors}
+                  onChange={handleChange}
+                />
+              </label>
+              <label>
+                Field
+                <input
+                  type="text"
+                  name="field"
+                  value={project.field}
+                  onChange={handleChange}
+                />
+              </label>
+              <label>
+                Google Scholar Link
+                <input
+                  type="text"
+                  name="gs_link"
+                  value={project.gs_link}
+                  onChange={handleChange}
+                />
+              </label>
+              <br />
+              <button type="submit">Publish Research</button>
+            </form>
+          </div>
         )}
       </div>
     </Wrapper>
