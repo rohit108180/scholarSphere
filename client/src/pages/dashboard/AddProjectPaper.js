@@ -7,13 +7,108 @@ export const AddProjectPaper = () => {
   const handleToggleView = () => {
     setCurrentView(currentView === "project" ? "research" : "project");
   };
+
+  const [project, setProject] = useState({
+    title: "",
+    description: "",
+    sdate: "",
+    edate: "",
+    tools: "",
+    github_link: "",
+    dlink: "",
+  });
+
+  const handleChange = (event) => {
+    setProject({
+      ...project,
+      [event.target.name]: event.target.value,
+    });
+  };
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    // Your code for posting the project goes here
+    console.log(project);
+  };
   return (
     <Wrapper>
       <div>
         <button class="toggle" onClick={handleToggleView}>
           Project/Research
         </button>
-        {currentView === "project" ? <div>View 1</div> : <div>View 2</div>}
+        {currentView === "project" ? (
+          <div>
+            <form onSubmit={handleSubmit}>
+              <h4>
+                <b>PROJECT</b>
+              </h4>
+              <label>
+                Title
+                <input
+                  type="text"
+                  name="title"
+                  value={project.title}
+                  onChange={handleChange}
+                />
+              </label>
+              <label>
+                Description
+                <textarea
+                  name="description"
+                  value={project.description}
+                  onChange={handleChange}
+                />
+              </label>
+              <label>
+                Start Date
+                <input
+                  type="date"
+                  name="start_date"
+                  value={project.sdate}
+                  onChange={handleChange}
+                />
+                End Date
+                <input
+                  type="date"
+                  name="end_date"
+                  value={project.edate}
+                  onChange={handleChange}
+                />
+              </label>
+              <label>
+                Tools used
+                <input
+                  type="text"
+                  name="tools_used"
+                  value={project.tools}
+                  onChange={handleChange}
+                />
+              </label>
+              <label>
+                Deployd Link
+                <input
+                  type="text"
+                  name="dlink"
+                  value={project.dlink}
+                  onChange={handleChange}
+                />
+              </label>
+              <label>
+                Github Link
+                <input
+                  type="text"
+                  name="github_link"
+                  value={project.github_link}
+                  onChange={handleChange}
+                />
+              </label>
+              <br />
+              <button type="submit">Post Project</button>
+            </form>
+          </div>
+        ) : (
+          <div>View 2</div>
+        )}
       </div>
     </Wrapper>
   );
