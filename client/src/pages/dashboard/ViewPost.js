@@ -1,9 +1,10 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Wrapper from "../../css/wrapper/Post";
 import TrendingSidebar from "../../component/TrendingSidebar";
+import { useAppcontext } from "../../context/appContext";
 
-export const viewpost = () => {
-  const { loadPost } = useAppcontext();
+export const ViewPost = () => {
+  const {  } = useAppcontext();
   const [project, setProject] = useState({
     title: "",
     description: "",
@@ -15,7 +16,7 @@ export const viewpost = () => {
   });
 
   useEffect(() => {
-    loadPost();
+
   }, []);
   return (
     <Wrapper>

@@ -19,7 +19,7 @@ export const links = [
     {
         id :3,
         text:'notification',
-        path :'',
+        path :'/openpost',
         icon : <FaWpforms/>
     },
     {
