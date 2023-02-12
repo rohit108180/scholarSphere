@@ -27,47 +27,9 @@ const createPost = async (req, res) => {
 const getAllPosts = async (req, res) => {
   const { status, PostType, sort, search } = req.query;
 
-  const queryObject = {
-    createdBy: req.user.userID,
-  };
-  // add stuff based on condition
+  let result = Post.find();
 
-  if (status && status !== 'all') {
-    queryObject.status = status;
-  }
-  if (PostType && PostType !== 'all') {
-    queryObject.PostType = PostType;
-  }
-  if (search) {
-    queryObject.title = { $regex: search, $options: 'i' };
-  }
-  // NO AWAIT
 
-  let result = Post.find(queryObject);
-
-  // chain sort conditions
-
-  if (sort === 'latest') {
-    result = result.sort('-createdAt');
-  }
-  if (sort === 'oldest') {
-    result = result.sort('createdAt');
-  }
-  if (sort === 'a-z') {
-    result = result.sort('title');
-  }
-  if (sort === 'z-a') {
-    result = result.sort('-title');
-  }
-
-  //
-
-  // setup pagination
-//   const page = Number(req.query.page) || 1;
-//   const limit = Number(req.query.limit) || 10;
-//   const skip = (page - 1) * limit;
-
-//   result = result.skip(skip).limit(limit);
 
   const Posts = await result;
 
@@ -75,6 +37,23 @@ const getAllPosts = async (req, res) => {
 //   const numOfPages = Math.ceil(totalPosts / limit);
 
 //   res.status(StatusCodes.OK).json({ Posts, totalPosts, numOfPages });
+  res.status(StatusCodes.OK).json({ Posts});
+};
+
+const getMyPosts = async (req, res) => {
+  const { status, PostType, sort, search } = req.query;
+
+  const queryObject = {
+    createdBy: req.user.userID,
+  };
+
+  let result = Post.find(queryObject);
+
+
+
+  const Posts = await result;
+
+
   res.status(StatusCodes.OK).json({ Posts});
 };
 
@@ -118,4 +97,4 @@ const deletePost = async (req, res) => {
   res.status(StatusCodes.OK).json({ msg: 'Success! Post removed' });
 };
    
-export { createPost, deletePost, getAllPosts, updatePost };
+export { createPost, deletePost, getAllPosts,getMyPosts, updatePost };

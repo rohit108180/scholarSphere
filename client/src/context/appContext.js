@@ -32,33 +32,7 @@ export const initialState = {
 
     const [state, dispatch] = useReducer(reducer, initialState);
 
-    const authFetch = axios.create({
-        baseURL: '/api/v1',
-      });
-      // request
-      authFetch.interceptors.request.use(
-        (config) => {
-          config.headers.common['Authorization'] = `Bearer ${state.token}`
-          return config
-        },
-        (error)=>{
-          return Promise.reject(error);
-        })
-    
-      // response
-    
-      authFetch.interceptors.response.use(
-        (response) => {
-          return response;
-        },
-        (error) => {
-          console.log(error.response)
-        //   if (error.response.status === 401) {
-        //     console.log("logout")
-        //   }
-          return Promise.reject(error);
-        }
-      );
+    axios.defaults.headers.common['Authorization'] = `Bearer ${state.token}`;
 
     const displayAlert = (alert, type) =>{
         dispatch({type : SHOW_ALERT, payload : {alert, type}});
@@ -126,7 +100,7 @@ export const initialState = {
     }
 
     const loadAllPosts = async () => {
-        const res  = await authFetch.get('/post');
+        const res  = await axios.get('/api/v1/post');
         console.log("posts" , res);
     }
 
