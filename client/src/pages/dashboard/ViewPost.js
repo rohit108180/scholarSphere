@@ -4,7 +4,7 @@ import TrendingSidebar from "../../component/TrendingSidebar";
 import { useAppcontext } from "../../context/appContext";
 
 export const ViewPost = () => {
-  const {  } = useAppcontext();
+  const {} = useAppcontext();
   const [project, setProject] = useState({
     title: "",
     description: "",
@@ -15,13 +15,11 @@ export const ViewPost = () => {
     dlink: "",
   });
 
-  useEffect(() => {
-
-  }, []);
+  useEffect(() => {}, []);
   return (
     <Wrapper>
       <div>
-        <div>
+        <div className="viewpost">
           <h4>
             <b>{project.title}</b>
           </h4>
@@ -51,9 +49,7 @@ export const ViewPost = () => {
             />
           </label>
           <br />
-        </div>
-        <div className="trending-sidebar">
-          <TrendingSidebar />
+          <button type="submit">Bookmark Post</button>
         </div>
       </div>
     </Wrapper>
