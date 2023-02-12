@@ -23,13 +23,14 @@ export const AddProjectPaper = () => {
     });
   };
   const [project, setProject] = useState({
-    title: "",
-    description: "",
-    sdate: "",
-    edate: "",
-    tools: "",
-    github_link: "",
-    dlink: "",
+    "title": "my second postt",
+    "tagline" : "",
+    "type": "Paper",
+    "live_link": "",
+    "github_link": "",
+    "research_paper_link": "",
+    "description": "",
+
   });
 
   const handleChange = (event) => {
@@ -47,14 +48,11 @@ export const AddProjectPaper = () => {
   return (
     <Wrapper>
       <div>
-        <button class="toggle" onClick={handleToggleView}>
-          Project/Research
-        </button>
         {currentView === "project" ? (
           <div>
             <form onSubmit={handleSubmit}>
               <h4>
-                <b>PROJECT</b>
+                POST
               </h4>
               <label>
                 Title

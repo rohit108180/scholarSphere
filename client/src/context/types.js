@@ -5,3 +5,6 @@ export const SETUP_USER_BEGINS = "SETUP_USER_BEGINS";
 export const SETUP_USER_SUCCESS = "SETUP_USER_SUCCESS";
 export const SETUP_USER_ERROR = "SETUP_USER_ERROR";
 export const TOGGLE_SIDEBAR = "TOGGLE_SIDEBAR";
+export const GET_ALL_POSTS = "GET_ALL_POSTS";
+export const GET_MY_POSTS = "GET_MY_POSTS";
+// export const POST_ = "POST_";

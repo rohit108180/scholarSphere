@@ -1,4 +1,4 @@
-import { CLEAR_ALERT, LOGOUT, SETUP_USER_BEGINS, SETUP_USER_ERROR, SETUP_USER_SUCCESS, SHOW_ALERT, TOGGLE_SIDEBAR } from "./types"
+import { CLEAR_ALERT, GET_ALL_POSTS, LOGOUT, SETUP_USER_BEGINS, SETUP_USER_ERROR, SETUP_USER_SUCCESS, SHOW_ALERT, TOGGLE_SIDEBAR } from "./types"
 import { initialState } from "./appContext"
 
 export const reducer = (state, action) =>{
@@ -52,6 +52,11 @@ export const reducer = (state, action) =>{
             return{
                 ...state,
                 showSidebar : !state.showSidebar
+            }
+        case GET_ALL_POSTS:
+            return{
+                ...state,
+                allPosts : action.payload.allPosts
             }
         default :
         return state;

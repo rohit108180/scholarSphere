@@ -1,6 +1,6 @@
 import { createContext, useContext, useReducer} from "react";
 import { reducer } from "./reducer";
-import { CLEAR_ALERT, SHOW_ALERT,  SETUP_USER_BEGINS, SETUP_USER_SUCCESS, SETUP_USER_ERROR, LOGOUT, TOGGLE_SIDEBAR } from "./types";
+import { CLEAR_ALERT, SHOW_ALERT,  SETUP_USER_BEGINS, SETUP_USER_SUCCESS, SETUP_USER_ERROR, LOGOUT, TOGGLE_SIDEBAR, GET_ALL_POSTS } from "./types";
 
 import axios from "axios";
 
@@ -100,8 +100,16 @@ export const initialState = {
     }
 
     const loadAllPosts = async () => {
+   
+        try {
         const res  = await axios.get('/api/v1/post');
-        console.log("posts" , res);
+        const data  = res.data.Posts
+        dispatch({type: GET_ALL_POSTS, payload : {allPosts : data}})
+            
+        } catch (error) {
+            
+        }
+        
     }
 
 
