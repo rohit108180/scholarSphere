@@ -52,9 +52,11 @@ const PostSchema = mongoose.Schema(
         ],
       },
     ],
+    toolsUsed : String,
     description: String,
     createdBy: { type: mongoose.Types.ObjectId, ref: "User" },
     contributors: [{ type: mongoose.Types.ObjectId, ref: "User" }],
+
     date: {
       type: Date,
       default: Date.now,

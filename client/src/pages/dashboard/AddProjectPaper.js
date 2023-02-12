@@ -1,108 +1,119 @@
 import React, { useState } from "react";
+import { Alert } from "../../component";
+import { useAppcontext } from "../../context/appContext";
 import Wrapper from "../../css/wrapper/AddProjectPaper";
 
+
+const initialState = {
+  title: "",
+  tagline: "",
+  type: "Project",
+  live_link: "",
+  github_link: "",
+  research_paper_link: "",
+  description: "",
+  toolsUsed: "",
+}
+
 export const AddProjectPaper = () => {
-  const [currentView, setCurrentView] = useState("project");
 
-  const handleToggleView = () => {
-    setCurrentView(currentView === "project" ? "research" : "project");
-  };
+  const { newPost, showAlert , isLoading} = useAppcontext();
 
-  const [research, setResearch] = useState({
-    title: "",
-    description: "",
-    authors: "",
-    gs_link: "",
-    field: "",
-  });
-
-  const handleChangeresearch = (event) => {
-    setResearch({
-      ...research,
-      [event.target.name]: event.target.value,
+  const scrollToTop = () => {
+    window.scrollTo({
+      top: 0,
+      left: 0,
+      behavior: "smooth"
     });
   };
-  const [project, setProject] = useState({
-    "title": "my second postt",
-    "tagline" : "",
-    "type": "Paper",
-    "live_link": "",
-    "github_link": "",
-    "research_paper_link": "",
-    "description": "",
 
-  });
+
+
+  const [post, setpost] = useState(initialState);
 
   const handleChange = (event) => {
-    setProject({
-      ...project,
+    setpost({
+      ...post,
       [event.target.name]: event.target.value,
     });
   };
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    // Your code for posting the project goes here
-    console.log(project);
+    newPost(post);
+    // scrollToTop();
+    console.log(post);
   };
   return (
     <Wrapper>
       <div>
-        {currentView === "project" ? (
-          <div>
-            <form onSubmit={handleSubmit}>
-              <h4>
-                POST
-              </h4>
-              <label>
-                Title
-                <input
-                  type="text"
-                  name="title"
-                  value={project.title}
-                  onChange={handleChange}
-                />
-              </label>
-              <label>
-                Description
-                <textarea
-                  name="description"
-                  value={project.description}
-                  onChange={handleChange}
-                />
-              </label>
-              <label>
-                Start Date
-                <input
-                  type="date"
-                  name="start_date"
-                  value={project.sdate}
-                  onChange={handleChange}
-                />
-                End Date
-                <input
-                  type="date"
-                  name="end_date"
-                  value={project.edate}
-                  onChange={handleChange}
-                />
-              </label>
+        <form>
+          <h2>POST</h2>
+          {showAlert && <Alert/>}
+          <label>
+            Title
+            <input
+              type="text"
+              name="title"
+              value={post.title}
+              onChange={handleChange}
+              placeholder="This is my first Post..."
+            />
+          </label>
+          
+          <label>
+            Description
+            <textarea
+              name="description"
+              value={post.description}
+              onChange={handleChange}
+              placeholder="The project/Paper comprises of ......"
+            />
+          </label>
+          <React.Fragment>
+            <input
+              type="radio"
+              name="type"
+              value="Project"
+              checked={post.type === "Project"}
+              onChange={handleChange}
+              className="radio"
+            />{" "}
+            Project
+            <input
+              type="radio"
+              name="type"
+              value="Paper"
+              checked={post.type === "Paper"}
+              onChange={handleChange}
+              className="radio"
+            />
+            Paper
+          </React.Fragment>
+
+          <br />
+          <hr />
+          {post.type === "Project" ? (
+            <React.Fragment>
               <label>
                 Tools used
                 <input
                   type="text"
-                  name="tools_used"
-                  value={project.tools}
+                  name="toolsUsed"
+                  value={post.toolsUsed}
                   onChange={handleChange}
+                  placeholder="The tech stack i have used in this project..."
                 />
               </label>
               <label>
                 Deployed Link
+               
                 <input
                   type="text"
-                  name="dlink"
-                  value={project.dlink}
+                  name="live_link"
+                  value={post.live_link}
                   onChange={handleChange}
+                  placeholder="The Project is live on this link "
                 />
               </label>
               <label>
@@ -110,69 +121,44 @@ export const AddProjectPaper = () => {
                 <input
                   type="text"
                   name="github_link"
-                  value={project.github_link}
+                  value={post.github_link}
                   onChange={handleChange}
+                  placeholder="The Github link for the project is"
                 />
               </label>
-              <br />
-              <button type="submit">Post Project</button>
-            </form>
-          </div>
-        ) : (
-          <div>
-            <form onSubmit={handleSubmit}>
-              <h4>
-                <b>RESEARCH</b>
-              </h4>
+            </React.Fragment>
+          ) : (
+            <React.Fragment>
               <label>
-                Title
+                Published Link:
                 <input
                   type="text"
-                  name="title"
-                  value={project.title}
+                  name="research_paper_link"
+                  value={post.research_paper_link}
                   onChange={handleChange}
+                  placeholder="My paper is published here"
                 />
               </label>
+
               <label>
-                Description
-                <textarea
-                  name="description"
-                  value={project.description}
-                  onChange={handleChange}
-                />
-              </label>
-              <label>
-                Authors
+                Domain
                 <input
                   type="text"
-                  name="authors"
-                  value={project.authors}
+                  name="toolsUsed"
+                  value={post.toolsUsed}
                   onChange={handleChange}
+                  placeholder="I have done this project in this particular domain"
                 />
               </label>
-              <label>
-                Field
-                <input
-                  type="text"
-                  name="field"
-                  value={project.field}
-                  onChange={handleChange}
-                />
-              </label>
-              <label>
-                Google Scholar Link
-                <input
-                  type="text"
-                  name="gs_link"
-                  value={project.gs_link}
-                  onChange={handleChange}
-                />
-              </label>
-              <br />
-              <button type="submit">Publish Research</button>
-            </form>
-          </div>
-        )}
+            </React.Fragment>
+          )}
+
+          <br />
+
+          <button type="submit" onClick={handleSubmit} className="btn" disabled = {isLoading}>
+            Post
+          </button>
+        </form>
       </div>
     </Wrapper>
   );

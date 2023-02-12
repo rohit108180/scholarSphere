@@ -4,12 +4,12 @@ const Wrapper = styled.aside`
   .toggle {
   }
   form {
-    width: 500px;
+    width: 70%;
     margin: 50px auto;
     padding: 30px;
-    border: 1px solid lightgray;
+
     border-radius: 10px;
-    box-shadow: 2px 2px 10px gray;
+   
   }
   label {
     display: block;
@@ -18,9 +18,18 @@ const Wrapper = styled.aside`
     font-weight: bold;
   }
 
-  input[type="text"],
+  input[type="text"]{
+    width: 100%;
+
+    padding: 10px;
+    font-size: 16px;
+    margin-bottom: 20px;
+    border: 1px solid lightgray;
+    border-radius: 5px;
+  }
   textarea {
     width: 100%;
+    height: 10rem;
     padding: 10px;
     font-size: 16px;
     margin-bottom: 20px;
@@ -42,11 +51,15 @@ const Wrapper = styled.aside`
     width: 100%;
     padding: 10px;
     font-size: 18px;
-    background-color: var(--primary-500);
+   
     color: white;
     border: none;
     border-radius: 5px;
-    cursor: pointer;
+
+  }
+
+  .radio{
+    margin: .5rem;
   }
 `;
 export default Wrapper;

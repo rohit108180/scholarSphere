@@ -1,6 +1,6 @@
 import { createContext, useContext, useReducer} from "react";
 import { reducer } from "./reducer";
-import { CLEAR_ALERT, SHOW_ALERT,  SETUP_USER_BEGINS, SETUP_USER_SUCCESS, SETUP_USER_ERROR, LOGOUT, TOGGLE_SIDEBAR, GET_ALL_POSTS } from "./types";
+import { CLEAR_ALERT, SHOW_ALERT,  SETUP_USER_BEGINS, SETUP_USER_SUCCESS, SETUP_USER_ERROR, LOGOUT, TOGGLE_SIDEBAR, GET_ALL_POSTS, GET_MY_POSTS, START_LOADING, STOP_LOADING } from "./types";
 
 import axios from "axios";
 
@@ -103,14 +103,52 @@ export const initialState = {
    
         try {
         const res  = await axios.get('/api/v1/post');
-        const data  = res.data.Posts
+        let data  = res.data.Posts
+        data  = data.sort((a, b) => {
+            return b.date - a.date;
+          });
         dispatch({type: GET_ALL_POSTS, payload : {allPosts : data}})
             
         } catch (error) {
-            
+            console.log(error);
         }
         
     }
+
+    const loadMyPosts = async () => {
+   
+        try {
+        const res  = await axios.get('/api/v1/post');
+        const data  = res.data.Posts
+        dispatch({type: GET_MY_POSTS, payload : {myPosts : data}})
+            
+        } catch (error) {
+            console.log(error);
+        }
+        
+    }
+
+    const startLoading = () =>{
+        dispatch({type: START_LOADING});
+    }
+    const stopLoading = () =>{
+        dispatch({type: STOP_LOADING});
+    }
+
+    const newPost = async(currentPost)=>{
+        startLoading();
+        try {
+            const res  = await axios.post("/api/v1/post", currentPost);
+            displayAlert("Succesfully Posted", "success")
+            console.log(res);
+            stopLoading();
+        } catch (error) {
+            displayAlert("Some Error Occured", "danger")
+            console.log(error);
+            stopLoading();
+        }
+    }
+
 
 
 
@@ -124,7 +162,9 @@ export const initialState = {
             setupUser,
             logoutUser,
             toggleSidebar,
-            loadAllPosts
+            loadAllPosts,
+            loadMyPosts,
+            newPost
             
 
         }}

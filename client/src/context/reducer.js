@@ -1,4 +1,4 @@
-import { CLEAR_ALERT, GET_ALL_POSTS, LOGOUT, SETUP_USER_BEGINS, SETUP_USER_ERROR, SETUP_USER_SUCCESS, SHOW_ALERT, TOGGLE_SIDEBAR } from "./types"
+import { CLEAR_ALERT, GET_ALL_POSTS, GET_MY_POSTS, LOGOUT, SETUP_USER_BEGINS, SETUP_USER_ERROR, SETUP_USER_SUCCESS, SHOW_ALERT, START_LOADING, STOP_LOADING, TOGGLE_SIDEBAR } from "./types"
 import { initialState } from "./appContext"
 
 export const reducer = (state, action) =>{
@@ -54,9 +54,25 @@ export const reducer = (state, action) =>{
                 showSidebar : !state.showSidebar
             }
         case GET_ALL_POSTS:
+            
             return{
                 ...state,
                 allPosts : action.payload.allPosts
+            }
+        case GET_MY_POSTS:
+            return{
+                ...state,
+                myPosts : action.payload.myPosts
+            }
+        case START_LOADING:
+            return {
+                ...state,
+                isLoading : true
+            }
+        case STOP_LOADING:
+            return {
+                ...state,
+                isLoading : false
             }
         default :
         return state;
