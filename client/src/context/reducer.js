@@ -1,4 +1,4 @@
-import { CLEAR_ALERT, GET_ALL_POSTS, GET_MY_POSTS, LOGOUT, SETUP_USER_BEGINS, SETUP_USER_ERROR, SETUP_USER_SUCCESS, SHOW_ALERT, START_LOADING, STOP_LOADING, TOGGLE_SIDEBAR } from "./types"
+import { CLEAR_ALERT, GET_ALL_POSTS, GET_MY_POSTS, LOGOUT, SETUP_USER_BEGINS, SETUP_USER_ERROR, SETUP_USER_SUCCESS, SHOW_ALERT, START_LOADING, STOP_LOADING, TOGGLE_SIDEBAR, UPDATE_PROFILE } from "./types"
 import { initialState } from "./appContext"
 
 export const reducer = (state, action) =>{
@@ -73,6 +73,11 @@ export const reducer = (state, action) =>{
             return {
                 ...state,
                 isLoading : false
+            }
+        case UPDATE_PROFILE :
+            return{
+                ...state,
+                user :action.payload.user
             }
         default :
         return state;

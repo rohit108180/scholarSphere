@@ -10,3 +10,4 @@ export const GET_MY_POSTS = "GET_MY_POSTS";
 export const NEW_POST = "NEW_POST";
 export const START_LOADING = "START_LOADING";
 export const STOP_LOADING = "STOP_LOADING";
+export const UPDATE_PROFILE = "UPDATE_PROFILE";

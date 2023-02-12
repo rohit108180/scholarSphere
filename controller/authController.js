@@ -10,6 +10,8 @@ class customAPIError extends Error{
 }
 
 
+
+
 const Register = async(req, res) =>{
 
         const {name, email, password} = req.body;
@@ -53,8 +55,24 @@ const Login = async(req, res) =>{
 }
 
 
-const UpdateUser = async(req, res) =>{
-    res.send("user updated"); 
-}
+const UpdateUser = async (req, res) => {
+    const { email, name, lastname, githubLink, linkedIn, instagram, resumeId, userBio } = req.body;
+    console.log(req.body);
+    
+    const user = await User.findOne({ _id: req.user.userID });
+    if(!user) console.log("User doesn't exits")
+  
+    user.lastname = lastname;
+    user.resumeId = resumeId;
+    user.userBio = userBio;
+    user.instagram = instagram;
+    user.linkedIn = linkedIn;
+    user.githubLink = githubLink;
+    
+    await user.save();
+
+    user.password= undefined;
+    res.status(StatusCodes.OK).json({ user, location: user.location });
+  };
 
 export {UpdateUser, Register, Login}

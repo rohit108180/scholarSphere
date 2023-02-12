@@ -27,7 +27,7 @@ const createPost = async (req, res) => {
 const getAllPosts = async (req, res) => {
   const { status, PostType, sort, search } = req.query;
 
-  let result = Post.find();
+  let result = Post.find().sort({date:-1});
 
 
 

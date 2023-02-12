@@ -1,5 +1,5 @@
 import React, {useState} from 'react'
-import { FormRow, ProfileIcon } from "../../component";
+import { Alert, FormRow, ProfileIcon } from "../../component";
 import Wrapper from "../../css/wrapper/Profile";
 import ToggleButton from '@mui/material/ToggleButton';
 import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
@@ -18,35 +18,7 @@ import { useAppcontext } from '../../context/appContext';
 
 
 
-const user = {
-  name: "First Name",
-  email: "demo@gmail.com",
-  password: "",
-  lastname : "Last Name",
-  location: "",
-  profilePicture: "https://avatars.githubusercontent.com/u/71789479?v=4",
-  role: "Student",
-  projects: ["P1", "P1", "P2"],
-  researchPapers: ["R1" , "R2", "R3"],
-  socialLinks : {
-    githubLink: "githum.com",
-    googleScholarProfileLink: "",
-    linkedIn :"linkedin.in",
-    intstagram : "instagram.com"
-  },
-  resumeId:"",
-  userBio: "I am a 3rd yr undergrad from NSUT Delhi.",
-  skillSet:["", "", ""],  
-  accomplishments: [{
-      title: "",
-      description: "",
-      date: ""
-  }, {
-    title: "",
-    description: "",
-    date: ""
-  }], 
-}
+
 
 
 
@@ -64,22 +36,22 @@ const style = {
 };
 
 
-const researchItems = user.researchPapers.map((number) => {
-  return (
-      <ListItemButton component="a" href={number}>
-          <ListItemText primary={number} />
-      </ListItemButton>
-  )
-});
+// const researchItems = user.researchPapers.map((number) => {
+//   return (
+//       <ListItemButton component="a" href={number}>
+//           <ListItemText primary={number} />
+//       </ListItemButton>
+//   )
+// });
 
 
-const projectItems = user.projects.map((number) => {
-  return (
-      <ListItemButton component="a" href={number}>
-          <ListItemText primary={number} />
-      </ListItemButton>
-  )
-});
+// const projectItems = user.projects.map((number) => {
+//   return (
+//       <ListItemButton component="a" href={number}>
+//           <ListItemText primary={number} />
+//       </ListItemButton>
+//   )
+// });
 
 
 
@@ -87,12 +59,27 @@ const projectItems = user.projects.map((number) => {
 
 export const Profile = () => {
 
-  const {user} = useAppcontext();
+  const {user, showAlert, updateProfile} = useAppcontext();
+  console.log(user);
+  const [state, setState] = useState({...user})
   const [alignment, setAlignment] = React.useState('research');
 
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
+
+  const handleChange2 = (event) => {
+    setState({
+      ...state,
+      [event.target.name]: event.target.value,
+    });
+  };
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    updateProfile(state);
+    console.log(state);
+  };
 
 
   let information;
@@ -117,9 +104,9 @@ export const Profile = () => {
             <span >Email: <a style={{color: '#0072b1'}} href={`mailto:{user.email}`}>{user.email}</a></span>
             
             <br></br>
-            <a style={{fontSize: '1.5rem', color: 'black'}} href={user.socialLinks.githubLink}> <FaGithub></FaGithub> </a>
-            <a style={{fontSize: '1.5rem', color: '#C13584'}} href={user.socialLinks.intstagram}> <FaInstagram></FaInstagram> </a>
-            <a style={{fontSize: '1.5rem', color: '#0072b1'}} href={user.socialLinks.linkedIn}> <FaLinkedin></FaLinkedin> </a>
+            <a style={{fontSize: '1.5rem', color: 'black'}} href={user.githubLink}> <FaGithub></FaGithub> </a>
+            <a style={{fontSize: '1.5rem', color: '#C13584'}} href={user.intstagram}> <FaInstagram></FaInstagram> </a>
+            <a style={{fontSize: '1.5rem', color: '#0072b1'}} href={user.linkedIn}> <FaLinkedin></FaLinkedin> </a>
 
             </div>
             <div>
@@ -127,7 +114,7 @@ export const Profile = () => {
                 Edit Profile
               </button> */}
               <div>
-                <Button onClick={handleOpen}>Edit Profile</Button>
+                <Button onClick={handleOpen} className="btn">Edit Profile</Button>
                 <Modal
                   open={open}
                   onClose={handleClose}
@@ -135,16 +122,20 @@ export const Profile = () => {
                   aria-describedby="modal-modal-description"
                 >
                   <Box sx={style}>
-                    <Typography id="modal-modal-title" variant="h6" component="h2">
+                    <Typography id="modal-modal-title" variant="h6" component="h2" >
                       Edit your profile
                     </Typography>
+                    {showAlert && <Alert/>}
                     <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-                      <TextField style={{padding: '0.2rem', width: '50%'}}  value={user.name} id="standard-basic" label="First Name" variant="standard" />
-                      <TextField style={{padding: '0.2rem', width: '50%'}}  value={user.lastname} id="standard-basic" label="Last Name" variant="standard" />
-                      <TextField style={{padding: '0.2rem', width: '100%'}} value={user.userBio}  id="standard-basic" label="Bio" variant="standard" />
-                      <TextField style={{padding: '0.2rem', width: '100%'}} value={user.socialLinks.githubLink}  id="standard-basic" label="Github Link" variant="standard" />
-                      <TextField style={{padding: '0.2rem', width: '100%'}} value={user.socialLinks.intstagram}  id="standard-basic" label="Instagram Link" variant="standard" />
-                      <TextField style={{padding: '0.2rem', width: '100%'}} value={user.socialLinks.linkedIn}  id="standard-basic" label="Linkedin Link" variant="standard" />
+                      <TextField style={{padding: '0.2rem', width: '50%'}}  value={state.name} id="standard-basic" label="First Name" variant="standard" name='name'onChange={handleChange2} dissabled={true}/>
+                      <TextField style={{padding: '0.2rem', width: '50%'}}  value={state.lastname} id="standard-basic" label="Last Name" variant="standard" name='lastname'onChange={handleChange2}/>
+                      <TextField style={{padding: '0.2rem', width: '100%'}} value={state.userBio}  id="standard-basic" label="Bio" variant="standard" name='userBio'onChange={handleChange2}/>
+                      <TextField style={{padding: '0.2rem', width: '100%'}} value={state.githubLink}  id="standard-basic" label="Github Link" variant="standard" name = "githubLink" onChange={handleChange2}/>
+                      <TextField style={{padding: '0.2rem', width: '100%'}} value={state.instagram}  id="standard-basic" label="Instagram Link" variant="standard" name="instagram" onChange={handleChange2}/>
+                      <TextField style={{padding: '0.2rem', width: '100%'}} value={state.linkedIn}  id="standard-basic" label="Linkedin Link" variant="standard" name="linkedIn" onChange={handleChange2}/>
+                      <TextField style={{padding: '0.2rem', width: '100%'}} value={state.resumeId}  id="standard-basic" label="Resume Link" variant="standard" name="resumeId" placeholder='My resume link is ...' onChange={handleChange2}/>
+
+                      <button type='submit' className='btn' onClick={handleSubmit} style={{padding: '0.5rem',margin:"1rem 0rem", width: '100%'}}>Save Profile</button>
                     </Typography>
                   </Box>
                 </Modal>
@@ -179,7 +170,7 @@ export const Profile = () => {
       </div>
 
       
-      {
+      {/* {
         alignment === "research" ? 
         (
           <div class="research">
@@ -191,7 +182,7 @@ export const Profile = () => {
           </div>
         )
       }
-      
+       */}
       
       
     </Wrapper>
