@@ -17,6 +17,7 @@
     "nodemon": "^2.0.20"
   },
   "dependencies": {
+    "@react-icons/all-files": "^4.1.0",
     "axios": "^1.2.5",
     "bcryptjs": "^2.4.3",
     "concurrently": "^7.6.0",
@@ -29,6 +30,7 @@
     "moment": "^2.29.4",
     "mongoose": "^6.8.4",
     "morgan": "^1.10.0",
+    "react-icons": "^4.7.1",
     "validator": "^13.7.0"
   }
 }
