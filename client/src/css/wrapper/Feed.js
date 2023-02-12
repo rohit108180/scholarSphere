@@ -9,7 +9,7 @@ const Wrapper = styled.main`
       justify-content: space-around;
       .posts{
         width: 65%;
-        overflow-y: scroll;
+    
         .post-something{
           /* display: none; */
           background-color: white;
@@ -45,7 +45,6 @@ const Wrapper = styled.main`
 
       .trending-sidebar{
         width: 30%;
-  
       }
       
     }
