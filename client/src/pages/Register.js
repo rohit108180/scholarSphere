@@ -3,6 +3,7 @@ import { Alert, FormRow, Logo } from "../component";
 import { useAppcontext } from "../context/appContext";
 import Wrapper from "../css/wrapper/RegisterPage";
 import { useNavigate} from "react-router-dom"
+import img from "../assets/images/bg.jpg"
 
 const initialState = {
   name: "",
@@ -60,6 +61,7 @@ export const Register = () => {
 
   return (
     <Wrapper className="full-page">
+      <img src={img} alt="" className="imgg"/>
       <form className = "form" onSubmit={onSubmit}>
         <Logo />
         <h3>

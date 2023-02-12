@@ -20,7 +20,6 @@ export const Navbar = () => {
 
         <div>
           <Logo/>
-          <h3 className="logo-text">Dashboard</h3>
         </div>
 
         <div className="btn-container">

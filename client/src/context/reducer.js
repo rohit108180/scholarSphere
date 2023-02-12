@@ -24,7 +24,7 @@ export const reducer = (state, action) =>{
                 isLoading : true
             }
         case SETUP_USER_SUCCESS:
-            localStorage.setItem('user', JSON.stringify(action.payload.token));
+            
             return {
                 ...state,
                 user : action.payload.user,

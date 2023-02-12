@@ -151,8 +151,9 @@ export const initialState = {
         startLoading();
         try {
             const res  = await axios.patch("/api/v1/auth/updateUser", currentUser);
-            dispatch({type:UPDATE_PROFILE, payload: {user:currentUser}})
+            dispatch({type:UPDATE_PROFILE, payload: {user: currentUser}})
             displayAlert("Succesfully Updated", "success")
+            localStorage.setItem('user', JSON.stringify(currentUser));
             console.log(res);
             stopLoading();
         } catch (error) {

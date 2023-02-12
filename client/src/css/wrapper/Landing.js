@@ -1,6 +1,18 @@
 import styled from "styled-components";
 
+
+
 const Wrapper = styled.main`
+  
+ 
+  overflow: hidden;
+  .imgg{
+    position: absolute;
+    width: 100%;
+    height: 100vh;
+    z-index: -1;
+    opacity: 1;
+  }
   nav {
     width: var(--fluid-width);
     max-width: var(--max-width);
@@ -14,10 +26,10 @@ const Wrapper = styled.main`
     min-height: calc(100vh- var(--nav-height));
     display: grid;
     align-items: center;
-    margin-top: -3rem;
+    margin-top: 3rem;
   }
 
-  h1 {
+  h2 {
     font-weight: 700;
     span {
       color: var(--primary-500);
