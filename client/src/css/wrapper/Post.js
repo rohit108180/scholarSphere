@@ -3,6 +3,14 @@ import styled from "styled-components";
 const Wrapper = styled.aside`
   .toggle {
   }
+  .viewpost {
+    width: 600px;
+    margin: 50px auto;
+    padding: 30px;
+    border: 1px solid lightgray;
+    border-radius: 10px;
+    box-shadow: 2px 2px 10px gray;
+  }
   form {
     width: 500px;
     margin: 50px auto;
