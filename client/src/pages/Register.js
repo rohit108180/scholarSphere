@@ -9,12 +9,13 @@ const initialState = {
   email: "",
   password: "",
   isMember: false,
+  role : "Student"
 };
 
 export const Register = () => {
   const [values, setValues] = useState(initialState);
 
-  const { isLoading, showAlert, displayAlert, setupUser, user } = useAppcontext();
+  const { isLoading, showAlert, displayAlert, setupUser, user} = useAppcontext();
 
   const navigate = useNavigate();
 
@@ -49,7 +50,7 @@ export const Register = () => {
         setupUser({email : values.email, password : values.password},  'login');
       }
       else {
-        setupUser({name : values.name, email : values.email, password :values.password}, 'register');
+        setupUser({name : values.name, email : values.email, password :values.password, role : values.role}, 'register');
       }
 
 
@@ -94,6 +95,30 @@ export const Register = () => {
             handleChange={handleChange}
             label = "Password"
           />
+{!values.isMember&&
+          <React.Fragment>
+            <input
+                type="radio"
+                name="role"
+                value="Student"
+                checked = {values.role === "Student"}
+                onChange={handleChange}
+                className= "radio"
+              />
+              Student {"     "}
+            <input
+                type="radio"
+                name="role"
+                value="Faculty"
+                checked = {
+                  values.role === "Faculty"
+                }
+                onChange={handleChange}
+                className= "radio"
+              />
+              Faculty
+            </React.Fragment>
+        }
         <button type="submit" className="btn btn-block" disabled={isLoading}>
             Submit
         </button>

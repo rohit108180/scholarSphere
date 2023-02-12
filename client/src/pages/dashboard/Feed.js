@@ -1,9 +1,17 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { AllPosts, FormRow, ProfileIcon } from "../../component";
 import TrendingSidebar from "../../component/TrendingSidebar";
+import { useAppcontext } from "../../context/appContext";
 import Wrapper from "../../css/wrapper/Feed";
 
 export const Feed = () => {
+
+  const {loadAllPosts} = useAppcontext();
+
+  useEffect(() => {
+    loadAllPosts();
+  }, [])
+  
   return (
     <Wrapper>
       <div className="feed-page">

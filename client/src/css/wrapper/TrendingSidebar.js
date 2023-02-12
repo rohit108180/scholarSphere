@@ -16,6 +16,7 @@ const Wrapper = styled.main`
     .trending-heading{
        padding: 1rem;
        border-bottom: 1px solid grey ;
+       font-size: 1.7rem;
        
     }
 

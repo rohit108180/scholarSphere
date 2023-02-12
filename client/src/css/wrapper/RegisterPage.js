@@ -31,5 +31,9 @@ const Wrapper = styled.section`
     cursor: pointer;
     letter-spacing: var(--letterSpacing);
   }
+
+  .radio{
+    margin: 0.5rem;
+  }
 `
 export default Wrapper

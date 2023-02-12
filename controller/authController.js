@@ -19,14 +19,14 @@ const Register = async(req, res) =>{
             throw new customAPIError("Please Provide all the valuess");
         }
 
+     
+
 
         const user = await User.create(req.body);
         const token =  user.createJWT();
 
-
-        res.status(StatusCodes.CREATED).json({user : {
-            name , email, location : user.location, lastname : user.lastname
-        }, token});
+        user.password=  undefined;
+        res.status(StatusCodes.CREATED).json({user , token});
 
 } 
  
