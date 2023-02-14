@@ -1,16 +1,12 @@
-#### SETUP REACT APP using npx create-react-app
+#### PROBLEM STATEMENT
+In the current academic scenario, students are not well informed about the research and projects being conducted in their colleges. This results in a lack of collaboration and students miss out on opportunities to enhance their skills and knowledge by working on real-world projects. Professors, on the other hand, face difficulties in finding suitable students to collaborate with on their projects and research work.
+The proposed solution to this problem is to create a platform where professors and students can share their research papers and projects, thereby enabling students to know about ongoing research and projects in their college and collaborate with the professors if they are interested. This platform will facilitate easy communication between students and professors, and also help in keeping track of the progress of the projects and research work.
+In summary, the objective of the project is to create a platform that acts as a bridge between professors and students, promoting collaboration and providing opportunities for students to learn and grow in their respective fields of study.
 
-
-#### spring Cleaning 
--in src remove
--App.css
--App.test.js
--logo.svg
--report
--setuptest.js
--fix App/js and index.js
-
-
-#### Normalize css
-
-
+#### CHALLENGES WE RAN INTO
+1. User authentication and authorization: Ensuring that only authorized users have access to the platform and ensuring that users can only access information and functionality relevant to them could be a complex task.
+2. Data security and privacy: Storing and transmitting sensitive information, such as research papers and project details, securely could be a major challenge.
+3. User-friendly interface: Creating a user-friendly interface that is easy to use for both professors and students could be a challenge, especially if the platform has a lot of features and functionalities.
+4. Designing a User-Interactive Website: A challenge we faced was creating a website that interacts with the user based on their actions. To overcome this, we utilized React State technology.
+To overcome these challenges, a thorough planning and design phase is crucial. During this phase, all potential challenges and risks should be identified and solutions should be devised to mitigate these challenges. For example, to address the user authentication and authorization challenge, a secure authentication mechanism was implemented, such as OAuth or a similar protocol. For data security and privacy, encryption and secure data storage solutions could be implemented. To ensure a user-friendly interface, a user-centered design approach could be followed, where user feedback and testing are integrated into the design process.
+In conclusion, while building a platform like this could present various challenges, a thorough planning and design phase, followed by implementation using best practices and proven technologies, can help overcome these challenges and deliver a successful solution.
