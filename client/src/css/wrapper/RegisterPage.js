@@ -3,10 +3,12 @@ import styled from 'styled-components'
 const Wrapper = styled.section`
   display: grid;
   align-items: center;
+
+  font-size: 12px;
   .imgg{
     position: absolute;
     width: 100%;
-    height: 100vh;
+    height: 120vh;
     z-index: -1;
     opacity: 1;
   }
@@ -16,7 +18,7 @@ const Wrapper = styled.section`
     margin-bottom: 1.38rem;
   }
   .form {
-    max-width: 400px;
+    max-width: 350px;
     border-top: 5px solid var(--primary-500);
   }
 
