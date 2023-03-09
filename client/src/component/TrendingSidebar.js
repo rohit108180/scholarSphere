@@ -19,7 +19,7 @@ function TrendingSidebar() {
             <ProfileIcon />
 
             <div className="trending-post-content">
-              <div className="card-heading"> Summer BBQ </div>
+              <div className="card-heading"> Rohit Sharma </div>
 
               <div className="subtitle">
                 <Typography
@@ -28,9 +28,9 @@ function TrendingSidebar() {
                   variant="body2"
                   color="text.primary"
                 >
-                  to Scott, Alex, Jennifer
+                  February 12, 2023
                 </Typography>
-                {" — Wish I could come, but I'm out of town "}
+                {" —Natural Language Processing "}
               </div>
             </div>
           </div>
@@ -38,7 +38,7 @@ function TrendingSidebar() {
             <ProfileIcon />
 
             <div className="trending-post-content">
-              <div className="card-heading"> Summer BBQ </div>
+              <div className="card-heading"> Rohit Sharma </div>
 
               <div className="subtitle">
                 <Typography
@@ -47,9 +47,9 @@ function TrendingSidebar() {
                   variant="body2"
                   color="text.primary"
                 >
-                  to Scott, Alex, Jennifer
+                  February 12, 2023
                 </Typography>
-                {" — Wish I could come, but I'm out of town "}
+                {" —Natural Language Processing "}
               </div>
             </div>
           </div>
@@ -57,7 +57,7 @@ function TrendingSidebar() {
             <ProfileIcon />
 
             <div className="trending-post-content">
-              <div className="card-heading"> Rohit Sharma</div>
+              <div className="card-heading"> Rohit Sharma </div>
 
               <div className="subtitle">
                 <Typography
@@ -66,9 +66,9 @@ function TrendingSidebar() {
                   variant="body2"
                   color="text.primary"
                 >
-                  to Scott, Alex, Jennifer
+                  February 12, 2023
                 </Typography>
-                {" — Wish I could come, but I'm out of town "}
+                {" —Natural Language Processing "}
               </div>
             </div>
           </div>
@@ -76,7 +76,7 @@ function TrendingSidebar() {
             <ProfileIcon />
 
             <div className="trending-post-content">
-              <div className="card-heading"> Summer BBQ </div>
+              <div className="card-heading"> Rohit Sharma </div>
 
               <div className="subtitle">
                 <Typography
@@ -85,12 +85,32 @@ function TrendingSidebar() {
                   variant="body2"
                   color="text.primary"
                 >
-                  to Scott, Alex, Jennifer
+                  February 12, 2023
                 </Typography>
-                {" — Wish I could come, but I'm out of town "}
+                {" —Natural Language Processing "}
               </div>
             </div>
           </div>
+          <div className="trending-post-card" alignItems="flex-start">
+            <ProfileIcon />
+
+            <div className="trending-post-content">
+              <div className="card-heading"> Rohit Sharma </div>
+
+              <div className="subtitle">
+                <Typography
+                  sx={{ display: "inline" }}
+                  component="span"
+                  variant="body2"
+                  color="text.primary"
+                >
+                  February 12, 2023
+                </Typography>
+                {" —Natural Language Processing "}
+              </div>
+            </div>
+          </div>
+        
         </div>
       </div>
     </Wrapper>

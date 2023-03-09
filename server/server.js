@@ -30,7 +30,7 @@ import { authenticateUser } from "./middleware/auth.js";
 
 
 
-// app.use(cors());
+
 
 app.get('/',(req , res) =>{
     res.json({msg :"Welcome!"});

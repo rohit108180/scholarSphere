@@ -4,17 +4,13 @@ import Wrapper from "../../css/wrapper/Profile";
 import ToggleButton from '@mui/material/ToggleButton';
 import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
 import { FaGithub, FaInstagram, FaLinkedin, FaLink } from 'react-icons/fa';
-import List from '@mui/material/List';
-import ListItem from '@mui/material/ListItem';
-import ListItemButton from '@mui/material/ListItemButton';
-import ListItemIcon from '@mui/material/ListItemIcon';
-import ListItemText from '@mui/material/ListItemText';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
 import TextField from '@mui/material/TextField';
 import { useAppcontext } from '../../context/appContext';
+import profileImg from "../../assets/images/profile.jpg"
 
 
 
@@ -94,7 +90,7 @@ export const Profile = () => {
     <Wrapper>
       <div class="main">
         <div class="profile">
-          <img class="user-image" src={user.profilePicture} alt={user.name}/>
+          <img class="user-image" src={profileImg} alt={user.name} style ={{width:"100%", height : "100%"}}/>
         </div>
         <div class="user-info">
           <div class="about">
