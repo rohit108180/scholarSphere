@@ -1,0 +1,15 @@
+export const SHOW_ALERT = "SHOW_ALERT";
+export const CLEAR_ALERT = "CLEAR_ALERT";
+export const LOGOUT = 'LOGOUT';
+export const SETUP_USER_BEGINS = "SETUP_USER_BEGINS";
+export const SETUP_USER_SUCCESS = "SETUP_USER_SUCCESS";
+export const SETUP_USER_ERROR = "SETUP_USER_ERROR";
+export const TOGGLE_SIDEBAR = "TOGGLE_SIDEBAR";
+export const GET_ALL_POSTS = "GET_ALL_POSTS";
+export const GET_MY_POSTS = "GET_MY_POSTS";
+export const NEW_POST = "NEW_POST";
+export const START_LOADING = "START_LOADING";
+export const STOP_LOADING = "STOP_LOADING";
+export const UPDATE_PROFILE = "UPDATE_PROFILE";
+export const TOGGLE_LIKE = "TOGGLE_LIKE";
+export const ADD_COMMENT = "ADD_COMMENT";
