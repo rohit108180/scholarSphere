@@ -11,10 +11,12 @@ import { uuid } from "uuidv4";
 import { v2 as cloudinary } from "cloudinary";
 
 cloudinary.config({
-  cloud_name: "diiehbal5",
-  api_key: "766823617577317",
-  api_secret: "dMQA7mUrL75ET6L9OKegUIEH3n0",
+  cloud_name: process.env.CLOUD_NAME,
+  api_key: process.env.CLOUD_KEY,
+  api_secret: process.env.CLOUD_SECRET,
 });
+
+
 
 const createPost = async (req, res) => {
   let newPost = req.body;

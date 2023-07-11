@@ -3,9 +3,9 @@ import User from "../models/User.js";
 import { v2 as cloudinary } from "cloudinary";
 
 cloudinary.config({
-  cloud_name: "diiehbal5",
-  api_key: "766823617577317",
-  api_secret: "dMQA7mUrL75ET6L9OKegUIEH3n0",
+  cloud_name: process.env.CLOUD_NAME,
+  api_key: process.env.CLOUD_KEY,
+  api_secret: process.env.CLOUD_SECRET,
 });
 
 // import
@@ -42,9 +42,9 @@ const Login = async (req, res) => {
   const user = await User.findOne({ email }).select("+password");
   if (!user) throw new Error("Invalid Credentials");
   const isMatch = await user.comparePassword(password);
-//   console.log("ismatch", isMatch);
+  //   console.log("ismatch", isMatch);
 
-//   throw new Error("Invalid Credentials");
+  //   throw new Error("Invalid Credentials");
   if (!isMatch) throw new Error("Invalid Credentials");
 
   const token = user.createJWT();
@@ -60,6 +60,8 @@ const UpdateUser = async (req, res) => {
   let updatedUser = req.body;
 
   if (updatedUser.profilePhoto) {
+
+    console.log("comming in this");
     const result = await cloudinary.uploader.upload(
       updatedUser.profilePhoto,
       {
@@ -77,16 +79,18 @@ const UpdateUser = async (req, res) => {
 
     delete updatedUser.profilePhoto;
 
+    console.log("the new result", result);
+
     updatedUser.profilePicture = {
       public_id: result.public_id,
       url: result.secure_url,
     };
 
-}
-const result1 = await User.updateOne(
-  { _id: updatedUser._id },
-  { $set: updatedUser }
-);
+  }
+  const result1 = await User.updateOne(
+    { _id: updatedUser._id },
+    { $set: updatedUser }
+  );
   updatedUser.password = undefined;
   // Check if the user was found and updated successfully
   if (result1.matchedCount === 1 && result1.modifiedCount === 1) {

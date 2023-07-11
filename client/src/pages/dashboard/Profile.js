@@ -42,7 +42,7 @@ export const Profile = () => {
   const {user, showAlert, updateProfile} = useAppcontext();
   console.log(user);
   const [state, setState] = useState({...user})
-  const [avatarPreview,setAvatarPreview] = useState(undefined);
+  const [avatarPreview,setAvatarPreview2] = useState(undefined);
   const [alignment, setAlignment] = React.useState('research');
 
   const [open, setOpen] = React.useState(false);
@@ -57,13 +57,13 @@ export const Profile = () => {
       reader.onload = () => {
         if (reader.readyState === 2) {
           console.log("read image", reader.result);
-          setAvatarPreview(reader.result);
+          setAvatarPreview2(reader.result);
           
 
           
           const newState = {
             ...state,
-            profilePhoto: avatarPreview
+            profilePhoto: reader.result
           }
 
           console.log(newState);
@@ -86,6 +86,7 @@ export const Profile = () => {
   const handleSubmit = (event) => {
     event.preventDefault();
     updateProfile(state);
+    setAvatarPreview2(null);
     console.log(state);
   };
 
