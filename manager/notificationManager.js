@@ -30,7 +30,7 @@ const getNotificationTypeManager = async (type)=>{
     }
 
 
-    const notificationType = await NotificationType.find({notificationName: type})
+    const notificationType = await NotificationType.findOne({notificationName: type})
 
     if(notificationType.length == 0){
         const error = new Error({
@@ -42,6 +42,61 @@ const getNotificationTypeManager = async (type)=>{
     }
 
     return {notificationType};
+}
+
+
+
+const createNotificationInstanceManager = async(notificationTypeName,notifiedFromUserId, notifiedToUserId, notificationMetadata)=>{
+
+
+    if(!notificationTypeName || !notifiedToUserId || !notificationMetadata){
+        const error = new Error({
+            status: HttpStatusCode.BadRequest,
+            message: "Missing fields in createNotificationInstanceManager"
+        });
+
+        console.log(error.message);
+        return {error};
+    }
+ 
+    const {notificationType, error} = await getNotificationTypeManager(notificationTypeName);
+
+
+
+    if(error){
+
+        console.log(error.message);
+        return {error};
+
+    }
+
+    console.log("notificationType", notificationType);
+
+    const notificationInstanceTemp =  {
+        notificationType : notificationType._id, notifiedFromUserId: notifiedFromUserId, notifiedToUserId , 
+        notificationMetadata
+    }
+
+    console.log("notification InstanceTemp", notificationInstanceTemp);
+    const notificationInstance = await 
+    NotificationInstances.create(notificationInstanceTemp);
+
+
+
+    if(!notificationInstance){
+    const error = new Error({
+            status: HttpStatusCode.BadRequest,
+            message: "Missing fields in createNotificationInstanceManager"
+        });
+        console.log(error.message);
+        return {error};
+    }
+
+    console.log("notificationInstance", notificationInstance.notificationMetadata); 
+
+
+
+    return {notificationInstance};
 }
 
 
@@ -67,6 +122,7 @@ const createNotificationTypeManager = async(notificationName, displayFormatStrin
 export {
     getNotificationsManager, 
     getNotificationTypeManager,
+    createNotificationInstanceManager,
     createNotificationTypeManager
 
 }

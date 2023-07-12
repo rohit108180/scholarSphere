@@ -19,7 +19,7 @@ function App() {
         <Route path="/" element={<ProtectedRoute><SharedLayer/></ProtectedRoute>}>
           <Route index element={<Feed/>} />
           <Route path='post' element={<AddProjectPaper/>} />
-          <Route path='openpost' element={<ViewPost/>} />
+          <Route path='notifications' element={<ViewPost/>} />
           <Route path='profile' element={<Profile/>} />
         </Route>
         <Route path = "/register" element={<Register/>}/>

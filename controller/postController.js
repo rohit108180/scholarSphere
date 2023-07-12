@@ -9,6 +9,8 @@ import checkPermissions from "../utils/checkPermissions.js";
 
 import { uuid } from "uuidv4";
 import { v2 as cloudinary } from "cloudinary";
+import User from "../models/User.js";
+import { createNotificationInstanceManager } from "../manager/notificationManager.js";
 
 cloudinary.config({
   cloud_name: process.env.CLOUD_NAME,
@@ -176,6 +178,38 @@ const likePost = async (req, res) => {
 
     post.likes.push(userId);
     await post.save();
+
+
+
+    // creating post liked notification 
+
+    let notificationMetadata = [];
+
+    // metadata for user who liked the post
+
+    const user = await User.findOne({ _id: userId});
+
+    notificationMetadata.push({
+      varName: "user",
+      displayStr: `${user?.name} ${user?.lastname}`,
+      relUrl:  `/user/${userId}`,
+    })
+
+    // Metadata for post
+    notificationMetadata.push({
+      varName: "postTitle",
+      displayStr: post?.title || "",
+      relUrl:  `/post/${postId}`
+
+    })
+
+    const {error} = await createNotificationInstanceManager("LIKED_POST", null, post?.createdBy, notificationMetadata);
+
+    if(error){
+      console.log(error);
+      return res.status(201)
+      .json({ isLiked: true, message: "Post liked successfully.", error: error.message });
+    }
 
     return res
       .status(201)

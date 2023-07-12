@@ -22,7 +22,8 @@ export const initialState = {
     alertText : "",
     alertType : "",
     showSidebar : false,
-    posts :[]
+    posts :[],
+    notifications :[],
 }
 
 
@@ -198,6 +199,7 @@ export const initialState = {
 
     }
 
+    
 
 
 
