@@ -13,3 +13,4 @@ export const STOP_LOADING = "STOP_LOADING";
 export const UPDATE_PROFILE = "UPDATE_PROFILE";
 export const TOGGLE_LIKE = "TOGGLE_LIKE";
 export const ADD_COMMENT = "ADD_COMMENT";
+export const GET_NOTIFICATIONS = "GET_NOTIFICATIONS";

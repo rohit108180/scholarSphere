@@ -12,8 +12,12 @@ const getNotificationsManager = async (userId)=>{
         return {error};
     }
 
+    // get all the notfications for the user in sorted order of date, latest first
 
-    const notifications = await NotificationInstances.find({notifiedToUser: userId}).sort({date: -1}).populate(['notificationTypeId',  'notifiedFromUser','notifiedToUser']);
+    const notifications = await NotificationInstances.find({notifiedToUser: userId}).populate(['notificationType',  'notifiedFromUser']).sort({createdAt: -1});
+
+
+ 
 
     return {notifications};
 }
@@ -73,7 +77,7 @@ const createNotificationInstanceManager = async(notificationTypeName,notifiedFro
     console.log("notificationType", notificationType);
 
     const notificationInstanceTemp =  {
-        notificationType : notificationType._id, notifiedFromUserId: notifiedFromUserId, notifiedToUserId , 
+        notificationType : notificationType._id, notifiedFromUser: notifiedFromUserId, notifiedToUser: notifiedToUserId , 
         notificationMetadata
     }
 

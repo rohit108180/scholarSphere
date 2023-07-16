@@ -8,4 +8,17 @@ const convertToInitials = (str) => {
   return initials.join("");
 };
 
-export {convertToInitials};
+
+const formateDate= (date)=>{
+  const dateObj = new Date(date);
+  const dateString = dateObj.toLocaleDateString("en-US", {
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+  });
+
+  return dateString;
+}
+
+
+export {convertToInitials, formateDate};

@@ -11,8 +11,8 @@ const notificationMetadataSchema = mongoose.Schema({
 // Notification Instance
 const notificationInstanceSchema = mongoose.Schema({
   notificationType: { type: mongoose.Types.ObjectId, ref: "NotificationType" , required: true },
-  notifiedFromUserId: { type: mongoose.Types.ObjectId, ref: "User"  },
-  notifiedToUserId:{ type: mongoose.Types.ObjectId, ref: "User" , required: true },
+  notifiedFromUser: { type: mongoose.Types.ObjectId, ref: "User"  },
+  notifiedToUser:{ type: mongoose.Types.ObjectId, ref: "User" , required: true },
   notificationMetadata: [{ type: notificationMetadataSchema, required: true }],
   createdAt:{ 
     type: Date,

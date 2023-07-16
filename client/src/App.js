@@ -4,7 +4,7 @@ import {BrowserRouter, Routes, Route, Link  } from "react-router-dom";
 import {Error, ProtectedRoute, Register } from './pages';
 import { AppProvider } from './context/appContext';
 import { Profile , SharedLayer, AddProjectPaper, Feed} from './pages/dashboard/index';
-import { ViewPost } from './pages/dashboard/ViewPost';
+import { Notifications } from './pages/dashboard/Notifications';
 
 
 
@@ -19,7 +19,7 @@ function App() {
         <Route path="/" element={<ProtectedRoute><SharedLayer/></ProtectedRoute>}>
           <Route index element={<Feed/>} />
           <Route path='post' element={<AddProjectPaper/>} />
-          <Route path='notifications' element={<ViewPost/>} />
+          <Route path='notifications' element={<Notifications/>} />
           <Route path='profile' element={<Profile/>} />
         </Route>
         <Route path = "/register" element={<Register/>}/>

@@ -19,6 +19,7 @@ import projectImg from "../assets/images/project.jpg";
 import { ProfileIcon } from "./ProfileIcon";
 import { useAppcontext } from "../context/appContext";
 import { useState } from "react";
+import { formateDate } from "../utils/stringUtils";
 
 const ExpandMore = styled((props) => {
   const { expand, ...other } = props;
@@ -62,18 +63,6 @@ export default function PostCard({ post }) {
     setExpanded(!expanded);
   };
 
-  const formateDate= (date)=>{
-    const dateObj = new Date(date);
-    const dateString = dateObj.toLocaleDateString("en-US", {
-      year: "numeric",
-      month: "long",
-      day: "numeric",
-    });
-
-    return dateString;
-  }
-
-
 
 //  console.log( createdBy);
 
@@ -86,7 +75,7 @@ export default function PostCard({ post }) {
     <Wrapper>
       <Card className="post-card">
         <CardHeader
-          avatar={<ProfileIcon avatar={createdBy.profilePicture.url}/>}
+          avatar={<ProfileIcon avatar={createdBy?.profilePicture?.url}/>}
           action={
             <IconButton aria-label="settings">
               <MoreVertIcon />
