@@ -12,11 +12,7 @@ import { v2 as cloudinary } from "cloudinary";
 import User from "../models/User.js";
 import { createNotificationInstanceManager } from "../manager/notificationManager.js";
 
-cloudinary.config({
-  cloud_name: process.env.CLOUD_NAME,
-  api_key: process.env.CLOUD_KEY,
-  api_secret: process.env.CLOUD_SECRET,
-});
+
 
 
 
@@ -29,6 +25,13 @@ const createPost = async (req, res) => {
   }
 
   if (image) {
+
+
+    cloudinary.config({
+      cloud_name: process.env.CLOUD_NAME,
+      api_key: process.env.CLOUD_KEY,
+      api_secret: process.env.CLOUD_SECRET,
+    });
 
     const result = await cloudinary.uploader.upload(
       image,

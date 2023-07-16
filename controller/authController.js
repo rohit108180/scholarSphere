@@ -2,11 +2,7 @@ import { StatusCodes } from "http-status-codes";
 import User from "../models/User.js";
 import { v2 as cloudinary } from "cloudinary";
 
-cloudinary.config({
-  cloud_name: process.env.CLOUD_NAME,
-  api_key: process.env.CLOUD_KEY,
-  api_secret: process.env.CLOUD_SECRET,
-});
+
 
 // import
 
@@ -62,6 +58,13 @@ const UpdateUser = async (req, res) => {
   if (updatedUser.profilePhoto) {
 
     console.log("comming in this");
+
+    cloudinary.config({
+      cloud_name: process.env.CLOUD_NAME,
+      api_key: process.env.CLOUD_KEY,
+      api_secret: process.env.CLOUD_SECRET,
+    });
+    
     const result = await cloudinary.uploader.upload(
       updatedUser.profilePhoto,
       {

@@ -31,6 +31,8 @@ export const initialState = {
 
     const [state, dispatch] = useReducer(reducer, initialState);
 
+    const BASE_URL = process.env.REACT_APP_BASE_URL;
+
     axios.defaults.headers.common['Authorization'] = `Bearer ${state.token}`;
 
     const displayAlert = (alert, type) =>{
@@ -50,7 +52,8 @@ export const initialState = {
     const setupUser = async(currentUser, action) =>{
         dispatch({type : SETUP_USER_BEGINS});
         try {
-            const res = await axios.post(`/api/v1/auth/${action}`, currentUser);
+            
+            const res = await axios.post(`${BASE_URL}/api/v1/auth/${action}`, currentUser);
             console.log(res);
             const {user, token} =  res.data;
             dispatch({type : SETUP_USER_SUCCESS, payload : {user, token}});
@@ -102,10 +105,13 @@ export const initialState = {
     const loadAllPosts = async () => {
    
         try {
-        const res  = await axios.get('/api/v1/post');
+        startLoading();
+        const res  = await axios.get(`${BASE_URL}/api/v1/post`);
         let data  = res.data.posts
 
         dispatch({type: GET_ALL_POSTS, payload : {posts : data}})
+
+        stopLoading();
             
         } catch (error) {
             console.log(error);
@@ -136,7 +142,7 @@ export const initialState = {
     const newPost = async(currentPost)=>{
         startLoading();
         try {
-            const res  = await axios.post("/api/v1/post", currentPost);
+            const res  = await axios.post(`${BASE_URL}/api/v1/post`, currentPost);
             displayAlert("Successfully Posted", "success")
             console.log(res);
             stopLoading();
@@ -150,7 +156,7 @@ export const initialState = {
     const updateProfile = async(currentUser)=>{
         startLoading();
         try {
-            const res  = await axios.patch("/api/v1/auth/updateUser", currentUser);
+            const res  = await axios.patch(`${BASE_URL}/api/v1/auth/updateUser`, currentUser);
 
             dispatch({type:UPDATE_PROFILE, payload: {user: res.data.user}})
             displayAlert("Successfully updated", "success")
@@ -166,7 +172,7 @@ export const initialState = {
 
     const toggleLike = async(postId)=>{
         try {
-            const res  = await axios.post(`/api/v1/post/${postId}/like`);
+            const res  = await axios.post(`${BASE_URL}/api/v1/post/${postId}/like`);
 
             // console.log(res);
             dispatch({type:TOGGLE_LIKE, payload: {postId, isLiked : res.data.isLiked}})
@@ -186,7 +192,7 @@ export const initialState = {
             level:1
         }
         try {
-        const res  = await axios.post(`/api/v1/post/${postId}/comment`, newComment);
+        const res  = await axios.post(`${BASE_URL}/api/v1/post/${postId}/comment`, newComment);
         console.log(res.data);
         dispatch({type: ADD_COMMENT, payload : {postId, post: res.data.post}});
         stopLoading();
@@ -201,7 +207,7 @@ export const initialState = {
 
     const getNotifications = async()=>{
         try {
-            const res  = await axios.get('/api/v1/notification');
+            const res  = await axios.get(`${BASE_URL}/api/v1/notification`);
             console.log(res.data);
             dispatch({type: GET_NOTIFICATIONS, payload : {notifications : res.data.notifications}})
                 
