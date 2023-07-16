@@ -29,8 +29,6 @@ export const reducer = (state, action) =>{
                 ...state,
                 user : action.payload.user,
                 token : action.payload.token,
-                userLocation: action.payload.user.location,
-                jobLocation : action.payload.user.location,
                 isLoading:false
             }
         case SETUP_USER_ERROR:

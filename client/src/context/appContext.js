@@ -16,7 +16,6 @@ const token = localStorage.getItem('token');
 export const initialState = {
     user : user ? user : null,
     token : token ? token : null,
-    userLocation : user? user.location: null,
     isLoading :false,
     showAlert : false,
     alertText : "",
@@ -76,7 +75,7 @@ export const initialState = {
     const addUsertoLocalStorage = ({user, token}) =>{
         localStorage.setItem("user", JSON.stringify(user));
         localStorage.setItem("token", token);
-        localStorage.setItem("location", user.location);
+  
     }
 
     
@@ -85,7 +84,6 @@ export const initialState = {
     const removeUserFromLocalStorage = () =>{
         localStorage.removeItem("user");
         localStorage.removeItem("token");
-        localStorage.removeItem("location");
     }
 
     const logoutUser = ()=>{
