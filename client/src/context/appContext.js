@@ -60,10 +60,11 @@ export const initialState = {
     
 
         } catch (error) {
-            displayAlert( error.response.data.msg, "error");
-            dispatch({type : SETUP_USER_ERROR});
             console.log(error);
             console.log(`${action} failed`);
+            displayAlert( error.response.data.msg, "error");
+            dispatch({type : SETUP_USER_ERROR});
+           
         }
 
         
