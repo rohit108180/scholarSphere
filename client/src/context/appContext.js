@@ -60,8 +60,9 @@ export const initialState = {
     
 
         } catch (error) {
-            displayAlert( error.response.data.msg, "danger");
+            displayAlert( error.response.data.msg, "error");
             dispatch({type : SETUP_USER_ERROR});
+            console.log(error);
             console.log(`${action} failed`);
         }
 
@@ -135,11 +136,11 @@ export const initialState = {
         startLoading();
         try {
             const res  = await axios.post("/api/v1/post", currentPost);
-            displayAlert("Succesfully Posted", "success")
+            displayAlert("Successfully Posted", "success")
             console.log(res);
             stopLoading();
         } catch (error) {
-            displayAlert("Some Error Occured", "danger")
+            displayAlert("Some Error occurred", "error")
             console.log(error);
             stopLoading();
         }
@@ -151,12 +152,12 @@ export const initialState = {
             const res  = await axios.patch("/api/v1/auth/updateUser", currentUser);
 
             dispatch({type:UPDATE_PROFILE, payload: {user: res.data.user}})
-            displayAlert("Succesfully Updated", "success")
+            displayAlert("Successfully updated", "success")
             localStorage.setItem('user', JSON.stringify(res.data.user));
             
             stopLoading();
         } catch (error) {
-            displayAlert("Some Error Occured", "danger")
+            displayAlert("Some Error occurred", "error")
             console.log(error); 
             stopLoading();
         }
@@ -170,7 +171,7 @@ export const initialState = {
             dispatch({type:TOGGLE_LIKE, payload: {postId, isLiked : res.data.isLiked}})
 
         } catch (error) {
-            displayAlert("Some Error Occured : Unable to like the post", "danger")
+            displayAlert("Some Error occurred : Unable to like the post", "error")
             console.log(error); 
             
         }
@@ -189,7 +190,7 @@ export const initialState = {
         dispatch({type: ADD_COMMENT, payload : {postId, post: res.data.post}});
         stopLoading();
         } catch (error) {
-            displayAlert("Some Error occurred : Unable to comment on the post", "danger")
+            displayAlert("Some Error occurred : Unable to comment on the post", "error")
             console.log(error); 
             stopLoading();
         }

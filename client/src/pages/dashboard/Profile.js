@@ -140,7 +140,7 @@ export const Profile = () => {
                     variant="h3" component="h2" >
                       Edit your profile
                     </Typography>
-                    {showAlert && <Alert/>}
+                
                     <Typography id="modal-modal-description" sx={{ mt: 2 }}>
                       <TextField style={{padding: '0.2rem', width: '50%'}}  value={state.name} id="standard-basic" label="First Name" variant="standard" name='name'onChange={handleChange2} dissabled={true}/>
                       <TextField style={{padding: '0.2rem', width: '50%'}}  value={state.lastname} id="standard-basic" label="Last Name" variant="standard" name='lastname' onChange={handleChange2}/>

@@ -44,7 +44,7 @@ export const Register = () => {
     e.preventDefault();
 
     if((values.name === "" && values.isMember === false) || values.email === "" || (values.password === "")){
-        displayAlert("Please fill all the feilds", "danger");
+        displayAlert("Please fill all the feilds", "error");
     }
     else{
       if(values.isMember){
@@ -68,8 +68,6 @@ export const Register = () => {
           {values.isMember ? "Login" : "Register"}
           </h3>
         {/* name field */}
-
-        {showAlert && <Alert/> }
 
         {!values.isMember  && 
         

@@ -74,7 +74,7 @@ export const AddProjectPaper = () => {
       <div>
         <form>
           <h2>POST</h2>
-          {showAlert && <Alert />}
+   
           <label>
             Title
             <input

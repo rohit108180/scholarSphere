@@ -5,6 +5,7 @@ import {Error, ProtectedRoute, Register } from './pages';
 import { AppProvider } from './context/appContext';
 import { Profile , SharedLayer, AddProjectPaper, Feed} from './pages/dashboard/index';
 import { Notifications } from './pages/dashboard/Notifications';
+import { MessageBar } from './component/MessageBar';
 
 
 
@@ -14,6 +15,7 @@ import { Notifications } from './pages/dashboard/Notifications';
 function App() {
   return (
     <AppProvider>
+      <MessageBar/>
     <BrowserRouter >
       <Routes>
         <Route path="/" element={<ProtectedRoute><SharedLayer/></ProtectedRoute>}>
