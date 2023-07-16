@@ -4,7 +4,9 @@ import { createNotificationTypeManager, getNotificationTypeManager, getNotificat
 
 const getNotifications = async (req, res) => {
 
-    const userId = req.user.userId;
+    const userId = req.user.userID;
+
+    console.log("userId", userId);
 
     const {notifications, error}  = await getNotificationsManager(userId);
 

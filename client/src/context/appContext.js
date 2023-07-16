@@ -1,6 +1,6 @@
 import { createContext, useContext, useReducer} from "react";
 import { reducer } from "./reducer";
-import { CLEAR_ALERT, SHOW_ALERT,  SETUP_USER_BEGINS, SETUP_USER_SUCCESS, SETUP_USER_ERROR, LOGOUT, TOGGLE_SIDEBAR, GET_ALL_POSTS, GET_MY_POSTS, START_LOADING, STOP_LOADING, UPDATE_PROFILE, TOGGLE_LIKE, ADD_COMMENT } from "./types";
+import { CLEAR_ALERT, SHOW_ALERT,  SETUP_USER_BEGINS, SETUP_USER_SUCCESS, SETUP_USER_ERROR, LOGOUT, TOGGLE_SIDEBAR, GET_ALL_POSTS, GET_MY_POSTS, START_LOADING, STOP_LOADING, UPDATE_PROFILE, TOGGLE_LIKE, ADD_COMMENT, GET_NOTIFICATIONS } from "./types";
 
 import axios from "axios";
 
@@ -199,6 +199,17 @@ export const initialState = {
 
     }
 
+    const getNotifications = async()=>{
+        try {
+            const res  = await axios.get('/api/v1/notification');
+            console.log(res.data);
+            dispatch({type: GET_NOTIFICATIONS, payload : {notifications : res.data.notifications}})
+                
+            } catch (error) {
+                console.log(error);
+            }
+    }
+
     
 
 
@@ -216,7 +227,8 @@ export const initialState = {
             toggleLike,
             newPost,
             updateProfile,
-            postComment
+            postComment,
+            getNotifications
             
 
         }}

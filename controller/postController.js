@@ -147,6 +147,7 @@ const likePost = async (req, res) => {
 
   const userId = req.user.userID;
 
+
   if (!postId) {
     return res.status(400).json({ message: "provide all the fields" });
   }
@@ -156,32 +157,7 @@ const likePost = async (req, res) => {
 
     const post = await Post.findOne({ _id: postId });
 
-    console.log(post?.likes);
-
-    const idx = post.likes.findIndex((item) => item == userId);
-    if (idx != -1) {
-      // User has already liked the post, so remove the like (dislike)
-
-      post.likes = post.likes.filter((item) => item != userId);
-
-      console.log("post after deleting the like", post);
-      await post.save();
-
-      console.log(post.likes);
-
-      return res
-        .status(200)
-        .json({ isLiked: false, message: "Post disliked successfully." });
-    }
-
-    // User has not liked the post yet, so create a new like
-
-    post.likes.push(userId);
-    await post.save();
-
-
-
-    // creating post liked notification 
+      // creating post liked notification 
 
     let notificationMetadata = [];
 
@@ -203,7 +179,44 @@ const likePost = async (req, res) => {
 
     })
 
-    const {error} = await createNotificationInstanceManager("LIKED_POST", null, post?.createdBy, notificationMetadata);
+
+    console.log(post?.likes);
+
+    const idx = post.likes.findIndex((item) => item == userId);
+    if (idx != -1) {
+      // User has already liked the post, so remove the like (dislike)
+
+      post.likes = post.likes.filter((item) => item != userId);
+
+      console.log("post after deleting the like", post);
+      await post.save();
+
+      console.log(post.likes);
+
+      const {error} = await createNotificationInstanceManager("DISLIKED_POST", userId, post?.createdBy, notificationMetadata);
+
+      if(error){
+        console.log(error);
+        return res.status(201)
+        .json({ isLiked: true, message: "Post disliked successfully.", error: error.message });
+      }
+  
+
+      return res
+        .status(200)
+        .json({ isLiked: false, message: "Post disliked successfully." });
+    }
+
+    // User has not liked the post yet, so create a new like
+
+    post.likes.push(userId);
+    await post.save();
+
+
+
+
+
+    const {error} = await createNotificationInstanceManager("LIKED_POST", userId, post?.createdBy, notificationMetadata);
 
     if(error){
       console.log(error);

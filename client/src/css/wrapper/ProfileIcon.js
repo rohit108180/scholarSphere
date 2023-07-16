@@ -9,18 +9,12 @@ const Wrapper = styled.div`
     display: flex;
     align-items: center;
     overflow: hidden;
-    span{
-        margin: auto;
-        font-size: 1.2rem;
-        letter-spacing: 2px;
-        color: white;
-
-        img{
+    img{
             width: 100%;
             height: 100%;
 
         }
-    }
+    
 `
 
 export default Wrapper

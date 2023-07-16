@@ -4,11 +4,13 @@ import {convertToInitials} from '../utils/stringUtils'
 import { FaUser } from 'react-icons/fa'
 // import img from '../assets/images/profile.'
 
+import Avatar from '@mui/material/Avatar';
+
 export const ProfileIcon = (props) => {
   const {avatar, name } = props
   return (
     <Wrapper>
-      <span>
+      <Avatar>
       {
         avatar?
         
@@ -17,7 +19,7 @@ export const ProfileIcon = (props) => {
       name?
          convertToInitials(name):<FaUser/>
          }
-          </span>
+          </Avatar>
         
     </Wrapper>
   )
