@@ -207,11 +207,13 @@ export const initialState = {
 
     const getNotifications = async()=>{
         try {
+            startLoading();
             const res  = await axios.get(`${BASE_URL}/api/v1/notification`);
             console.log(res.data);
             dispatch({type: GET_NOTIFICATIONS, payload : {notifications : res.data.notifications}})
-                
+            stopLoading();
             } catch (error) {
+                
                 console.log(error);
             }
     }

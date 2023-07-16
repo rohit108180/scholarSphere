@@ -82,7 +82,7 @@ export const AddProjectPaper = () => {
               name="title"
               value={post.title}
               onChange={handleChange}
-              placeholder="This is my first Post..."
+              placeholder="This is the title of my post..."
             />
           </label>
 

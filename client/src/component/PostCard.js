@@ -64,23 +64,17 @@ export default function PostCard({ post }) {
   };
 
 
-//  console.log( createdBy);
-
-
-
-
   return (
-
-    
+  
     <Wrapper>
       <Card className="post-card">
         <CardHeader
           avatar={<ProfileIcon avatar={createdBy?.profilePicture?.url}/>}
-          action={
-            <IconButton aria-label="settings">
-              <MoreVertIcon />
-            </IconButton>
-          }
+          // action={
+          //   <IconButton aria-label="settings">
+          //     <MoreVertIcon />
+          //   </IconButton>
+          // }
           title= {createdBy.name+" "+ createdBy.lastname}
           subheader={formateDate(date)}
         />

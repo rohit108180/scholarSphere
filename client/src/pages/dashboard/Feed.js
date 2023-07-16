@@ -35,9 +35,9 @@ export const Feed = () => {
 
             <AllPosts/>
         </div>
-        <div className="trending-sidebar">
+        {/* <div className="trending-sidebar">
           <TrendingSidebar/>
-        </div>
+        </div> */}
       </div>
     </Wrapper>
   );

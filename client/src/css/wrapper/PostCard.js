@@ -5,7 +5,7 @@ const Wrapper = styled.div`
         width: 100%;
         border-radius: 10px;
         margin : 3rem 0rem;
-
+        max-width: 40rem;
     }
     .liked{
         color: red;

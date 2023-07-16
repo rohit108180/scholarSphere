@@ -8,6 +8,7 @@ export const AllPosts = () => {
   const { posts, isLoading } = useAppcontext();
   return (
     <Wrapper>
+      <div className="post-cards">
       {isLoading &&
       <div><PostCardShimmer/>
       <PostCardShimmer/>
@@ -16,6 +17,7 @@ export const AllPosts = () => {
       {posts.map((post) => {
         return <PostCard post= {post} key = {post._id}/>;
       })}
+      </div>
     </Wrapper>
   );
 };

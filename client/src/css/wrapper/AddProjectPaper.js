@@ -29,7 +29,7 @@ const Wrapper = styled.aside`
   }
   textarea {
     width: 100%;
-    height: 10rem;
+    height: 20rem;
     padding: 10px;
     font-size: 16px;
     margin-bottom: 20px;
@@ -60,6 +60,12 @@ const Wrapper = styled.aside`
 
   .radio{
     margin: .5rem;
+  }
+
+  @media (max-width: 762px) {
+    form {
+      width: 100%;
+    }
   }
 `;
 export default Wrapper;
