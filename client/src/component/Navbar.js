@@ -21,7 +21,7 @@ export const Navbar = () => {
         <div>
           <Logo/>
         </div>
-
+      {user &&
         <div className="btn-container">
           <button className="btn" onClick={()=> setShowLogout(!showLogout)}>
             <FaUserCircle/>
@@ -36,7 +36,7 @@ export const Navbar = () => {
             </button>
           </div>
 
-        </div>
+        </div>}
       </div>
     </Wrapper>
   );

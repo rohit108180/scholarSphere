@@ -3,7 +3,7 @@ import { Landing } from './pages/Landing';
 import {BrowserRouter, Routes, Route, Link  } from "react-router-dom";
 import {Error, ProtectedRoute, Register } from './pages';
 import { AppProvider } from './context/appContext';
-import { Profile , SharedLayer, AddProjectPaper, Feed} from './pages/dashboard/index';
+import { Profile , SharedLayer, AddProjectPaper, Feed, LinX} from './pages/dashboard/index';
 import { Notifications } from './pages/dashboard/Notifications';
 import { MessageBar } from './component/MessageBar';
 
@@ -18,14 +18,15 @@ function App() {
       <MessageBar/>
     <BrowserRouter >
       <Routes>
-        <Route path="/" element={<ProtectedRoute><SharedLayer/></ProtectedRoute>}>
+        {/* <Route path="/" element={<ProtectedRoute><SharedLayer/></ProtectedRoute>}>
           <Route index element={<Feed/>} />
           <Route path='post' element={<AddProjectPaper/>} />
           <Route path='notifications' element={<Notifications/>} />
           <Route path='profile' element={<Profile/>} />
-        </Route>
-        <Route path = "/register" element={<Register/>}/>
-        <Route path = "/landing" element={<Landing/>}/>
+        </Route> */}
+        {/* <Route path = "/register" element={<Register/>}/> */}
+        <Route path = "/" element={<Landing/>}/>
+        <Route path = "/LinX" element={<LinX/>}/>
         <Route path = "*" element={<Error/>}/>
 
       </Routes>

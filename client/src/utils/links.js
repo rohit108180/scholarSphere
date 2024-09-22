@@ -8,24 +8,27 @@ export const links = [
         id :1,
         text:'Home',
         path :'',
-        icon : <IoBarChartSharp/>
+        icon : <IoBarChartSharp/>,
     },
     {
         id :2,
         text:'Post',
-        path :'post',
-        icon : <MdQueryStats/>
+        path :'Create post',
+        icon : <MdQueryStats/>,
+        locked: true
     },
     {
         id :3,
-        text:'notification',
+        text:'Notification',
         path :'/notifications',
-        icon : <FaWpforms/>
+        icon : <FaWpforms/>,
+        locked: true
     },
     {
         id :4,
         text:'Profile',
         path :'profile',
-        icon : <ImProfile/>
+        icon : <ImProfile/>,
+        locked: true
     },
 ]

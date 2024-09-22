@@ -11,6 +11,7 @@ import { uuid } from "uuidv4";
 import { v2 as cloudinary } from "cloudinary";
 import User from "../models/User.js";
 import { createNotificationInstanceManager } from "../manager/notificationManager.js";
+import LinxPost from "../models/LinxPost.js";
 
 
 
@@ -92,6 +93,57 @@ const getPosts = async (req, res) => {
 
   try {
     const posts = await Post.find(queryObject).sort(sortObject).populate('createdBy');
+
+    
+    res.status(StatusCodes.OK).json({ posts });
+  } catch (error) {
+    console.error(error);
+    res
+      .status(StatusCodes.INTERNAL_SERVER_ERROR)
+      .json({ message: "Internal server error" });
+  }
+};
+
+const getLinXPost = async (req, res) => {
+  const { userId, status, postType, sort, search, date } = req.query;
+
+  let queryObject = {};
+
+  // Filter by status (if provided)
+  if (status) {
+    queryObject.status = status;
+  }
+  else {
+    queryObject.status = "QUALIFIED";
+  }
+
+  // Filter by postType (if provided)
+  if (postType) {
+    queryObject.type = postType;
+  }
+
+
+  // Search by title (if provided)
+  if (search) {
+    queryObject.href_text = { $regex: search, $options: "i" };
+  }
+  // Filter by userid (if provided)
+  // if (userId) {
+  //   queryObject.createdBy = userId;
+  // }
+
+  let sortObject = {};
+
+  // Sort by date (if provided)
+  if (sort === "oldest") {
+    sortObject.createdAt = 1;
+  } else {
+    sortObject.createdAt = -1; // default to newest
+  }
+
+  try {
+    console.log(queryObject)
+    const posts = await LinxPost.find(queryObject).sort(sortObject).limit(200);
 
     
     res.status(StatusCodes.OK).json({ posts });
@@ -306,6 +358,7 @@ export {
   createPost,
   deletePost,
   getPosts,
+  getLinXPost,
   updatePost,
   likePost,
   addComment,

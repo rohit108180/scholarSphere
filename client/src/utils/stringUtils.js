@@ -1,6 +1,6 @@
 const convertToInitials = (str) => {
 
-  const words = str.split(" ");
+  const words = str.split(" ")?.slice(0,2);
 
 
   const initials = words.map((word) => word.charAt(0).toUpperCase());

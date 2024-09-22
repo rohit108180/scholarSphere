@@ -1,6 +1,6 @@
 import { createContext, useContext, useReducer} from "react";
 import { reducer } from "./reducer";
-import { CLEAR_ALERT, SHOW_ALERT,  SETUP_USER_BEGINS, SETUP_USER_SUCCESS, SETUP_USER_ERROR, LOGOUT, TOGGLE_SIDEBAR, GET_ALL_POSTS, GET_MY_POSTS, START_LOADING, STOP_LOADING, UPDATE_PROFILE, TOGGLE_LIKE, ADD_COMMENT, GET_NOTIFICATIONS } from "./types";
+import { CLEAR_ALERT, SHOW_ALERT,  SETUP_USER_BEGINS, SETUP_USER_SUCCESS, SETUP_USER_ERROR, LOGOUT, TOGGLE_SIDEBAR, GET_ALL_POSTS, GET_MY_POSTS, START_LOADING, STOP_LOADING, UPDATE_PROFILE, TOGGLE_LIKE, ADD_COMMENT, GET_NOTIFICATIONS, GET_ALL_LINX_POSTS, TOGGLE_LINX_LIKE, TOGGLE_LINX_DISLIKE } from "./types";
 
 import axios from "axios";
 
@@ -22,6 +22,7 @@ export const initialState = {
     alertType : "",
     showSidebar : false,
     posts :[],
+    linXPosts: [],
     notifications :[],
 }
 
@@ -31,7 +32,7 @@ export const initialState = {
 
     const [state, dispatch] = useReducer(reducer, initialState);
 
-    const BASE_URL = process.env.REACT_APP_BASE_URL;
+    const BASE_URL = process.env.REACT_APP_BASE_URL || "http://localhost:5000";
 
     axios.defaults.headers.common['Authorization'] = `Bearer ${state.token}`;
 
@@ -118,6 +119,22 @@ export const initialState = {
         }
         
     }
+    const loadAllLinXPosts = async () => {
+   
+        try {
+        startLoading();
+        const res  = await axios.get(`${BASE_URL}/api/v1/post/linx`);
+        let data  = res.data.posts
+
+        dispatch({type: GET_ALL_LINX_POSTS, payload : {linXPosts : data}})
+
+        stopLoading();
+            
+        } catch (error) {
+            console.log(error);
+        }
+        
+    }
 
     const loadMyPosts = async () => {
    
@@ -184,6 +201,35 @@ export const initialState = {
         }
     }
 
+    const toggleLinXLike = async(postId)=>{
+        try {
+            // const res  = await axios.post(`${BASE_URL}/api/v1/post/linx/${postId}/like`);
+
+            // console.log(res);
+            dispatch({type:TOGGLE_LINX_LIKE, payload: {postId}})
+
+        } catch (error) {
+            displayAlert("Some Error occurred : Unable to like the post", "error")
+            console.log(error); 
+            
+        }
+    }
+
+
+    const toggleLinXDislike = async(postId)=>{
+        try {
+            // const res  = await axios.post(`${BASE_URL}/api/v1/post/linx/${postId}/like`);
+
+            // console.log(res);
+            dispatch({type:TOGGLE_LINX_DISLIKE, payload: {postId}})
+
+        } catch (error) {
+            displayAlert("Some Error occurred : Unable to like the post", "error")
+            console.log(error); 
+            
+        }
+    }
+
     const postComment = async(commentMessage, postId, level)=>{
 
         startLoading();
@@ -231,14 +277,15 @@ export const initialState = {
             logoutUser,
             toggleSidebar,
             loadAllPosts,
+            loadAllLinXPosts,
             loadMyPosts,
             toggleLike,
+            toggleLinXLike,
+            toggleLinXDislike,
             newPost,
             updateProfile,
             postComment,
             getNotifications
-            
-
         }}
     >
         {children}

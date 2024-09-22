@@ -1,4 +1,4 @@
-import { ADD_COMMENT, CLEAR_ALERT, GET_ALL_POSTS, GET_MY_POSTS, GET_NOTIFICATIONS, LOGOUT, SETUP_USER_BEGINS, SETUP_USER_ERROR, SETUP_USER_SUCCESS, SHOW_ALERT, START_LOADING, STOP_LOADING, TOGGLE_LIKE, TOGGLE_SIDEBAR, UPDATE_PROFILE } from "./types"
+import { ADD_COMMENT, CLEAR_ALERT, GET_ALL_LINX_POSTS, GET_ALL_POSTS, GET_MY_POSTS, GET_NOTIFICATIONS, LOGOUT, SETUP_USER_BEGINS, SETUP_USER_ERROR, SETUP_USER_SUCCESS, SHOW_ALERT, START_LOADING, STOP_LOADING, TOGGLE_LIKE, TOGGLE_LINX_DISLIKE, TOGGLE_LINX_LIKE, TOGGLE_SIDEBAR, UPDATE_PROFILE } from "./types"
 import { initialState } from "./appContext"
 
 export const reducer = (state, action) =>{
@@ -57,6 +57,12 @@ export const reducer = (state, action) =>{
                 ...state,
                 posts : action.payload.posts
             }
+        case GET_ALL_LINX_POSTS:
+            
+            return{
+                ...state,
+                linXPosts : action.payload.linXPosts
+            }
         case GET_MY_POSTS:
             return{
                 ...state,
@@ -90,7 +96,78 @@ export const reducer = (state, action) =>{
                 ...state,
                 posts : posts
             }
+        case TOGGLE_LINX_DISLIKE:
+            const dislikedPosts = JSON.parse(localStorage.getItem('dislikedPosts')) || [];
+            if (dislikedPosts.includes(action.payload.postId)) {
+                // Remove from disliked posts if already disliked
+                dislikedPosts.splice(dislikedPosts.indexOf(action.payload.postId), 1);
+                localStorage.setItem('dislikedPosts', JSON.stringify(dislikedPosts));
+              } else {
+                // Add to disliked posts if not already disliked
+                dislikedPosts.push(action.payload.postId);
+                localStorage.setItem('dislikedPosts', JSON.stringify(dislikedPosts));
+              }
+            let linXPostsD = state.posts;
+            linXPostsD.map(post=>{
+                if(post._id === action.payload.postId){
+                    if(action.payload.isLiked){
+                        console.log("liking the post");
 
+                        post.dislikes = post.dislikes+1;
+                    }
+                    else{
+                        console.log("disliking the post");
+                        post.dislikes = post.dislikes-1;
+                    }
+                    
+                }
+                return post;
+            })
+
+            
+            return {
+                ...state,
+                linXPosts : linXPostsD
+            }
+        case TOGGLE_LINX_LIKE:
+            const likedPosts = JSON.parse(localStorage.getItem('likedPosts')) || [];
+            if (likedPosts.includes(action.payload.postId)) {
+                // Remove from liked posts if already liked
+                likedPosts.splice(likedPosts.indexOf(action.payload.postId), 1);
+                localStorage.setItem('likedPosts', JSON.stringify(likedPosts));
+                action.payload.isLiked =false;
+              } else {
+                // Add to liked posts if not already liked
+                likedPosts.push(action.payload.postId);
+                localStorage.setItem('likedPosts', JSON.stringify(likedPosts));
+                action.payload.isLiked =true;
+              }
+            let linXPostL = state.posts;
+            linXPostL.map(post=>{
+                if(post._id === action.payload.postId){
+                    if(action.payload.isLiked){
+                        console.log("liking the post");
+
+                        if ( !post.likes) post.likes = 0;
+                        post.likes++;
+                    }
+                    else{
+                        console.log("disliking the post");
+                        if ( !post.likes) post.likes = 0;
+                        else
+                        post.likes = (post.likes) -1;
+                    }
+                    
+                }
+                return post;
+            })
+
+            
+            return {
+                ...state,
+                linXPosts : linXPostL
+            }
+            
         case ADD_COMMENT:
             const {postId, post} = action.payload;
 

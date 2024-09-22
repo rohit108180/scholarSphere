@@ -1,8 +1,9 @@
 import { Profile } from "./Profile";
-import { SharedLayer } from "./SharedLayer";
 import {AddProjectPaper} from "./AddProjectPaper"
+import { SharedLayer } from "./SharedLayer";
 import {Feed} from "./Feed"
+import {LinX} from "./LinX"
 
 
 
-export {Profile, SharedLayer, Feed, AddProjectPaper};
+export {Profile, SharedLayer, Feed, LinX, AddProjectPaper};

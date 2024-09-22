@@ -11,7 +11,7 @@ export const Landing = () => {
   const navigate = useNavigate();
 
   const handleClick = () => {
-    navigate("/register");
+    navigate("/linX");
   };
 
   return (
@@ -29,7 +29,7 @@ export const Landing = () => {
           Join us in celebrating the power and potential of college students and their contributions to the academic community. Discover their innovative ideas and research, all in one convenient platform.
           </p>
           <button className="btn btn-hero" onClick={handleClick}>
-            Login/Register
+            Join the community
           </button>
         </div>
         <img src={main} alt="job-hunt" className="img main-img" />

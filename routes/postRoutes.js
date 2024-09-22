@@ -3,6 +3,7 @@ import {
   createPost,
   deletePost,
   getPosts,
+  getLinXPost,
   updatePost,
   likePost,
   addComment,
@@ -12,6 +13,7 @@ import {
 const PostRouter = express.Router();
 
 PostRouter.route("/").post(createPost).get(getPosts);
+// PostRouter.route("/linx").get(getLinXPost);
 PostRouter.route("/:postId/like").post(likePost);
 
 PostRouter.route("/:postId/comment").post(addComment).delete(deleteComment)

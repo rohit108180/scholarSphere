@@ -1,5 +1,6 @@
 import { Alert } from "./Alert";
 import { AllPosts } from "./AllPosts";
+import { AllLinXPosts } from "./AllLinXPosts";
 import { BigSidebar } from "./BigSidebar";
 import { FormRow } from "./FormRow";
 import { Logo } from "./Logo";
@@ -12,4 +13,4 @@ import { SmallSidebar } from "./SmallSidebar";
 
 
 
-export {Logo, FormRow , Alert, Navbar, BigSidebar, SmallSidebar, Navlinks, ProfileIcon, AllPosts, PostCard};
+export {Logo, FormRow , Alert, Navbar, BigSidebar, SmallSidebar, Navlinks, ProfileIcon, AllPosts, PostCard, AllLinXPosts};
