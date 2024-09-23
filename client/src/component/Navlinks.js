@@ -9,7 +9,7 @@ export const Navlinks = () => {
   function clickedLink(e, locked) {
     if (locked){
         e.preventDefault();
-        displayAlert("This feature is under paid plan", "info");
+        displayAlert("Feature coming soon", "info");
     }
   }
   return (

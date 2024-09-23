@@ -7,15 +7,22 @@ import { SharedLayer } from "./SharedLayer";
 
 export const LinX = () => {
 
-  const {loadAllLinXPosts} = useAppcontext();
+  const {loadAllLinXPosts, linXPosts} = useAppcontext();
 
   useEffect(() => {
     loadAllLinXPosts();
   }, [])
-  
+  let todaysPost =  linXPosts.filter(post => {
+    const today = new Date();
+    const postDate = new Date(post.createdAt);
+    return postDate.toDateString() === today.toDateString();
+  })?.length;
   return (
     <Wrapper>
       <SharedLayer>
+        { Boolean(linXPosts?.length) &&
+          <div style={{width:"100%", height: "25px", textAlign:"center", color:"white", backgroundColor:"green"}}> Added {todaysPost} new posts today </div>
+        }
         <div className="feed-page">
           <div className="posts">
             {/* <div className="post-something">

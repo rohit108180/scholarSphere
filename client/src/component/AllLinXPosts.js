@@ -10,7 +10,9 @@ export const AllLinXPosts = () => {
     <Wrapper>
       <div className="post-cards"style={{width:"100%", maxWidth:"40rem"}}>
       {isLoading &&
-      <div ><PostCardShimmer/><br/>
+      <div >
+        It may take a minute for the first cold start ...
+        <PostCardShimmer/><br/>
       <PostCardShimmer/><br/>
       <PostCardShimmer/></div>}
 

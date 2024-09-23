@@ -25,8 +25,8 @@ function App() {
           <Route path='profile' element={<Profile/>} />
         </Route> */}
         {/* <Route path = "/register" element={<Register/>}/> */}
-        <Route path = "/" element={<Landing/>}/>
-        <Route path = "/LinX" element={<LinX/>}/>
+        {/* <Route path = "/" element={<Landing/>}/> */}
+        <Route path = "/" element={<LinX/>}/>
         <Route path = "*" element={<Error/>}/>
 
       </Routes>
