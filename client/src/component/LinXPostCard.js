@@ -20,6 +20,7 @@ import { ProfileIcon } from "./ProfileIcon";
 import { useAppcontext } from "../context/appContext";
 import { useState } from "react";
 import { formateDate } from "../utils/stringUtils";
+import { Chip, Stack } from "@mui/material";
 
 const ExpandMore = styled((props) => {
   const { expand, ...other } = props;
@@ -39,7 +40,7 @@ export default function LinXPostCard({ post }) {
 
   const { toggleLike, user, postComment } = useAppcontext();
 
-  const { poster, poster_bio, profile, feed_text, feet_html, createdAt, status, likes, summary, reason, tags, feed_html } = post;
+  const { poster, poster_bio, profile, feed_text, createdAt, status, likes, summary, reason, tags, feed_html } = post;
 
   const [comment, setComment] = useState("");
   const [loading , setLoading] = useState(false);
@@ -74,7 +75,7 @@ export default function LinXPostCard({ post }) {
           //     <MoreVertIcon />
           //   </IconButton>
           // }
-          title= {poster}
+          title= {<React.Fragment><a href={profile}>{poster}</a> | {formateDate(createdAt)}</React.Fragment>}
           subheader={poster_bio}
         />
 
@@ -83,6 +84,11 @@ export default function LinXPostCard({ post }) {
           <b>Summary : </b>
             {summary}
           </Typography>
+          <Stack direction="row" spacing={1} style={{marginTop:"1rem", width:"100%", flexWrap: "wrap"}}>
+            {
+              tags?.split(",")?.slice(0,4)?.map(tag=> <Chip label= {tag}  variant="outlined"/> )
+            }
+        </Stack>
           <Collapse in={expanded} timeout="auto" unmountOnExit>
             <CardContent>
               <Typography paragraph dangerouslySetInnerHTML={{ __html: feed_html }}></Typography>
@@ -99,9 +105,7 @@ export default function LinXPostCard({ post }) {
           </Collapse>
         </CardContent>
         <CardActions disableSpacing>
-          <span className="likes">{
-            
-          likes}</span>
+          <span className="likes">{likes}</span>
           {/* <IconButton
             aria-label="add to favorites"
             className="like"

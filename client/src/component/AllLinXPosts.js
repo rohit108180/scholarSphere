@@ -11,12 +11,13 @@ export const AllLinXPosts = () => {
       <div className="post-cards"style={{width:"100%", maxWidth:"40rem"}}>
       {isLoading &&
       <div >
-        It may take a minute for the first cold start ...
+        Only for people who know the pain for serverless coldstart...
         <PostCardShimmer/><br/>
       <PostCardShimmer/><br/>
       <PostCardShimmer/></div>}
 
       {linXPosts.map((post) => {
+        if(post?.poster_bio?.includes("followers"))return null;
         return <LinXPostCard post= {post} key = {post._id}/>;
       })}
       </div>

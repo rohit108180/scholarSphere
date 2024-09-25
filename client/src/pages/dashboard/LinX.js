@@ -20,7 +20,7 @@ export const LinX = () => {
   return (
     <Wrapper>
       <SharedLayer>
-        { Boolean(linXPosts?.length) &&
+        { Boolean(todaysPost) &&
           <div style={{width:"100%", height: "25px", textAlign:"center", color:"white", backgroundColor:"green"}}> Added {todaysPost} new posts today </div>
         }
         <div className="feed-page">
