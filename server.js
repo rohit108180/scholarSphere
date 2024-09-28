@@ -28,7 +28,7 @@ import errorHandlerMiddleware from "./middleware/error-handler.js";
 import notFoundMiddleWare from "./middleware/not-found.js";
 import { authenticateUser } from "./middleware/auth.js";
 import NotificationRouter from "./routes/notificationRoutes.js";
-import { getLinXPost } from "./controller/postController.js";
+import { getLinXPost, saveLinXPost } from "./controller/postController.js";
 
 
 
@@ -50,6 +50,7 @@ if(process.env.NODE_ENV != 'production'){
 
 app.use(express.json());
 app.get("/api/v1/post/linx",getLinXPost);
+app.post("/api/v1/post/linx",saveLinXPost);
 app.use("/api/v1/auth", authRouter);
 app.use("/api/v1/post",authenticateUser,PostRouter);
 app.use("/api/v1/notification", authenticateUser, NotificationRouter);

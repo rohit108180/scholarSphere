@@ -13,7 +13,7 @@ import User from "../models/User.js";
 import { createNotificationInstanceManager } from "../manager/notificationManager.js";
 import LinxPost from "../models/LinxPost.js";
 
-
+import mongoose from "mongoose";
 
 
 
@@ -143,7 +143,7 @@ const getLinXPost = async (req, res) => {
 
   try {
     console.log(queryObject)
-    const posts = await LinxPost.find(queryObject).sort(sortObject).limit(200);
+    const posts = await LinxPost.find(queryObject).sort(sortObject).limit(100);
 
     
     res.status(StatusCodes.OK).json({ posts });
@@ -178,6 +178,22 @@ const updatePost = async (req, res) => {
 
   res.status(StatusCodes.OK).json({ updatedPost });
 };
+
+const saveLinXPost = async (req, res) => {
+ 
+  const post = req.body;
+  
+  if(!post._id) post._id =  new mongoose.Types.ObjectId();
+
+  
+  const savedPost = await LinxPost.findOneAndUpdate({ _id: post._id }, post, {
+    new: true,
+    upsert: true,
+  });
+
+  res.status(StatusCodes.OK).json({ savedPost });
+};
+
 const deletePost = async (req, res) => {
   const { id: PostId } = req.params;
 
@@ -354,12 +370,14 @@ const addComment = async (req, res) => {
 
 const deleteComment = async (req, res) => {};
 
+
 export {
   createPost,
   deletePost,
   getPosts,
   getLinXPost,
   updatePost,
+  saveLinXPost,
   likePost,
   addComment,
   deleteComment,

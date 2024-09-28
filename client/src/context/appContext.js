@@ -1,8 +1,9 @@
 import { createContext, useContext, useReducer} from "react";
 import { reducer } from "./reducer";
-import { CLEAR_ALERT, SHOW_ALERT,  SETUP_USER_BEGINS, SETUP_USER_SUCCESS, SETUP_USER_ERROR, LOGOUT, TOGGLE_SIDEBAR, GET_ALL_POSTS, GET_MY_POSTS, START_LOADING, STOP_LOADING, UPDATE_PROFILE, TOGGLE_LIKE, ADD_COMMENT, GET_NOTIFICATIONS, GET_ALL_LINX_POSTS, TOGGLE_LINX_LIKE, TOGGLE_LINX_DISLIKE } from "./types";
+import { CLEAR_ALERT, SHOW_ALERT,  SETUP_USER_BEGINS, SETUP_USER_SUCCESS, SETUP_USER_ERROR, LOGOUT, TOGGLE_SIDEBAR, GET_ALL_POSTS, GET_MY_POSTS, START_LOADING, STOP_LOADING, UPDATE_PROFILE, TOGGLE_LIKE, ADD_COMMENT, GET_NOTIFICATIONS, GET_ALL_LINX_POSTS, SAVE_LINX_POST, TOGGLE_LINX_DISLIKE } from "./types";
 
 import axios from "axios";
+import { track } from "../usage-tracking";
 
 
 export const AppContext = createContext();
@@ -12,7 +13,7 @@ export const AppContext = createContext();
 const user = JSON.parse(localStorage.getItem('user'));
 const token = localStorage.getItem('token');
 
-
+const isSuperAdmin = localStorage.getItem("isSuperAdmin") == "true" || process.env.REACT_APP_SUPER_ADMIN =="true" ;
 export const initialState = {
     user : user ? user : null,
     token : token ? token : null,
@@ -21,6 +22,7 @@ export const initialState = {
     alertText : "",
     alertType : "",
     showSidebar : false,
+    isSuperAdmin: isSuperAdmin,
     posts :[],
     linXPosts: [],
     notifications :[],
@@ -33,6 +35,9 @@ export const initialState = {
     const [state, dispatch] = useReducer(reducer, initialState);
 
     const BASE_URL = process.env.REACT_APP_BASE_URL || "http://localhost:5000";
+
+
+
 
     axios.defaults.headers.common['Authorization'] = `Bearer ${state.token}`;
 
@@ -120,14 +125,15 @@ export const initialState = {
         
     }
     const loadAllLinXPosts = async () => {
-   
+        track("Started loading posts")
         try {
         startLoading();
         const res  = await axios.get(`${BASE_URL}/api/v1/post/linx`);
         let data  = res.data.posts
 
         dispatch({type: GET_ALL_LINX_POSTS, payload : {linXPosts : data}})
-
+        
+        track("Loaded all posts")
         stopLoading();
             
         } catch (error) {
@@ -152,6 +158,7 @@ export const initialState = {
     const startLoading = () =>{
         dispatch({type: START_LOADING});
     }
+
     const stopLoading = () =>{
         dispatch({type: STOP_LOADING});
     }
@@ -202,18 +209,46 @@ export const initialState = {
     }
 
     const toggleLinXLike = async(postId)=>{
+        track("click liked", {postId})
         try {
-            // const res  = await axios.post(`${BASE_URL}/api/v1/post/linx/${postId}/like`);
 
-            // console.log(res);
-            dispatch({type:TOGGLE_LINX_LIKE, payload: {postId}})
+            let likedPosts = JSON.parse(localStorage.getItem('likedPosts')) || [];
+            let delta = 0;
+            if (likedPosts.includes(postId)) {
+                likedPosts = likedPosts.filter(loopPostId => loopPostId != postId );
+                delta = -1;
+            } else {
+                likedPosts.push(postId);
+                delta = 1;
+            }
+            localStorage.setItem('likedPosts', JSON.stringify(likedPosts));
+
+
+            let linXPosts = state.linXPosts;
+            let post = linXPosts.filter(post=>post._id === postId)[0];
+            if(post.likes === undefined){
+                post.likes = 0;
+            }
+            
+            post.likes = Math.max(post.likes + delta, 0);
+
+            await saveLinXPost(post);
+            
 
         } catch (error) {
             displayAlert("Some Error occurred : Unable to like the post", "error")
             console.log(error); 
-            
         }
     }
+
+    const saveLinXPost = async (post) =>{
+        const isNew  = post?._id ? false: true;
+        const res  = await axios.post(`${BASE_URL}/api/v1/post/linx`, post).catch(() => track("Error saving the post"));
+
+        
+        dispatch({type:SAVE_LINX_POST, payload: {savedPost: res.data.savedPost, isNew}});
+    }
+
 
 
     const toggleLinXDislike = async(postId)=>{
@@ -264,8 +299,6 @@ export const initialState = {
             }
     }
 
-    
-
 
 
   return (
@@ -280,12 +313,13 @@ export const initialState = {
             loadAllLinXPosts,
             loadMyPosts,
             toggleLike,
+            saveLinXPost,
             toggleLinXLike,
             toggleLinXDislike,
             newPost,
             updateProfile,
             postComment,
-            getNotifications
+            getNotifications,
         }}
     >
         {children}

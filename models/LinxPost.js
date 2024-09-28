@@ -7,10 +7,12 @@ const PostSchema =  new mongoose.Schema({
   profile: { type: String },
   feed_text: { type: String },
   feed_html: { type: String },
-  href_map: { type: Object, default: {} },
   createdAt: { type: Date, default: Date.now },
   status: { type: String},
   tags : {type: String},
+  new_tags: [{type: String}],
+  relevance: {type: String},
+  likes: {type: Number},
   summary : {type : String},
   reason: {type: String}
 });

@@ -1,4 +1,4 @@
-import { ADD_COMMENT, CLEAR_ALERT, GET_ALL_LINX_POSTS, GET_ALL_POSTS, GET_MY_POSTS, GET_NOTIFICATIONS, LOGOUT, SETUP_USER_BEGINS, SETUP_USER_ERROR, SETUP_USER_SUCCESS, SHOW_ALERT, START_LOADING, STOP_LOADING, TOGGLE_LIKE, TOGGLE_LINX_DISLIKE, TOGGLE_LINX_LIKE, TOGGLE_SIDEBAR, UPDATE_PROFILE } from "./types"
+import { ADD_COMMENT, CLEAR_ALERT, GET_ALL_LINX_POSTS, GET_ALL_POSTS, GET_MY_POSTS, GET_NOTIFICATIONS, LOGOUT, SETUP_USER_BEGINS, SETUP_USER_ERROR, SETUP_USER_SUCCESS, SHOW_ALERT, START_LOADING, STOP_LOADING, TOGGLE_LIKE, TOGGLE_LINX_DISLIKE, SAVE_LINX_POST, TOGGLE_SIDEBAR, UPDATE_PROFILE } from "./types"
 import { initialState } from "./appContext"
 
 export const reducer = (state, action) =>{
@@ -129,43 +129,24 @@ export const reducer = (state, action) =>{
                 ...state,
                 linXPosts : linXPostsD
             }
-        case TOGGLE_LINX_LIKE:
-            const likedPosts = JSON.parse(localStorage.getItem('likedPosts')) || [];
-            if (likedPosts.includes(action.payload.postId)) {
-                // Remove from liked posts if already liked
-                likedPosts.splice(likedPosts.indexOf(action.payload.postId), 1);
-                localStorage.setItem('likedPosts', JSON.stringify(likedPosts));
-                action.payload.isLiked =false;
-              } else {
-                // Add to liked posts if not already liked
-                likedPosts.push(action.payload.postId);
-                localStorage.setItem('likedPosts', JSON.stringify(likedPosts));
-                action.payload.isLiked =true;
-              }
-            let linXPostL = state.posts;
-            linXPostL.map(post=>{
-                if(post._id === action.payload.postId){
-                    if(action.payload.isLiked){
-                        console.log("liking the post");
+        case SAVE_LINX_POST:
+            let updatedPosts = [];
+            if(action.payload.isNew){
+                updatedPosts = [action.payload.savedPost, ...state.linXPosts,];
+            }
+            else{
+                updatedPosts = state.linXPosts.map(post => {
+                    if(post?._id == action.payload.savedPost?.id) return action.payload.savedPost;
 
-                        if ( !post.likes) post.likes = 0;
-                        post.likes++;
-                    }
-                    else{
-                        console.log("disliking the post");
-                        if ( !post.likes) post.likes = 0;
-                        else
-                        post.likes = (post.likes) -1;
-                    }
-                    
+                    return post;
                 }
-                return post;
-            })
-
+            )
+            }
             
+
             return {
                 ...state,
-                linXPosts : linXPostL
+                linXPosts : updatedPosts
             }
             
         case ADD_COMMENT:

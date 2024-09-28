@@ -21,6 +21,7 @@ import { useAppcontext } from "../context/appContext";
 import { useState } from "react";
 import { formateDate } from "../utils/stringUtils";
 import { Chip, Stack } from "@mui/material";
+import { track } from "../usage-tracking";
 
 const ExpandMore = styled((props) => {
   const { expand, ...other } = props;
@@ -38,9 +39,9 @@ const ExpandMore = styled((props) => {
 
 export default function LinXPostCard({ post }) {
 
-  const { toggleLike, user, postComment } = useAppcontext();
+  const { toggleLinXLike, user, postComment } = useAppcontext();
 
-  const { poster, poster_bio, profile, feed_text, createdAt, status, likes, summary, reason, tags, feed_html } = post;
+  const { poster, poster_bio, profile, feed_text, createdAt, status, likes, summary, reason, tags, feed_html, _id, relevance } = post;
 
   const [comment, setComment] = useState("");
   const [loading , setLoading] = useState(false);
@@ -59,9 +60,19 @@ export default function LinXPostCard({ post }) {
 
   const [expanded, setExpanded] = React.useState(false);
 
+
+
   const handleExpandClick = () => {
+    track(`${!expanded? "Expanded ":"Unexpanded"} a post`, {postId: _id, summary:summary })
     setExpanded(!expanded);
   };
+  
+
+  const isLiked = (postId) => {
+    const likedPosts = localStorage.getItem("likedPosts") || [];
+    if(likedPosts.includes(postId)) return true;
+    return false;
+  }
 
 
   return (
@@ -75,7 +86,7 @@ export default function LinXPostCard({ post }) {
           //     <MoreVertIcon />
           //   </IconButton>
           // }
-          title= {<React.Fragment><a href={profile}>{poster}</a> | {formateDate(createdAt)}</React.Fragment>}
+          title= {<React.Fragment><a href={profile} onClick={()=>track("Clicked on profile link", {postId: _id, profile})}>{poster}</a> | {formateDate(createdAt)}</React.Fragment>}
           subheader={poster_bio}
         />
 
@@ -86,7 +97,7 @@ export default function LinXPostCard({ post }) {
           </Typography>
           <Stack direction="row" spacing={1} style={{marginTop:"1rem", width:"100%", flexWrap: "wrap"}}>
             {
-              tags?.split(",")?.slice(0,4)?.map(tag=> <Chip label= {tag}  variant="outlined"/> )
+              tags?.split(",")?.slice(0,4)?.map(tag=> <Chip label= {tag}  variant="outlined" style={{transform:"scale(0.9)"}}/> )
             }
         </Stack>
           <Collapse in={expanded} timeout="auto" unmountOnExit>
@@ -105,18 +116,18 @@ export default function LinXPostCard({ post }) {
           </Collapse>
         </CardContent>
         <CardActions disableSpacing>
-          <span className="likes">{likes}</span>
-          {/* <IconButton
+          
+          {/* <span className="likes">{likes || 0}</span> */}
+          <IconButton
             aria-label="add to favorites"
             className="like"
-            onClick={() => toggleLike(_id)}
-          > */}
+            onClick={() => toggleLinXLike(_id)}
+          >
 
-            {/* <FavoriteIcon className={ likes.findIndex(id=>id == user._id) != -1 ? "liked" : null} /> */}
+            <FavoriteIcon className={ isLiked(_id) ? "liked" : null} />
 
             
-          {/* </IconButton> */}
-          
+          </IconButton>
           <ExpandMore
             expand={expanded}
             onClick={handleExpandClick}

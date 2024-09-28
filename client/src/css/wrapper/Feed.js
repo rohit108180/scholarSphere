@@ -23,6 +23,10 @@ const Wrapper = styled.main`
         justify-content: space-around;
         border-radius: 10px;
         box-shadow: var(--shadow-1);
+        margin: 2rem 0;
+        padding: 1rem;
+
+   
 
         .form-input {
           width: 70%;
@@ -30,6 +34,17 @@ const Wrapper = styled.main`
           height: 3rem;
           /* display: none; */
         }
+
+        &.expanded {
+          flex-direction: column;
+          gap: 10px;
+          height: fit-content;
+
+          .form-input{
+            width: 90%
+          }
+        }
+
       }
       .hr {
         margin: 2rem 0;

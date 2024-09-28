@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import 'normalize.css'
 import './index.css';
 import App from './App';
+import "./mixpanel"
 
 ReactDOM.render(
   <React.StrictMode>
