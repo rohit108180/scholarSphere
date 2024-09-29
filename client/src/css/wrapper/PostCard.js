@@ -8,7 +8,7 @@ const Wrapper = styled.div`
         max-width: 40rem;
     }
     .liked{
-        color: red;
+        color: blue;
         z-index:0
     }
 `

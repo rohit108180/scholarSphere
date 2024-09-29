@@ -28,7 +28,7 @@ export const AllLinXPosts = () => {
             <FormControlLabel
               control={<Checkbox checked={showLiked}
               onChange={() =>{ track("Show Licked Clicked", {showLiked: !showLiked}); setShowLiked(!showLiked)}} />}
-              label="SHOW LIKED POSTS"
+              label="Show Bookmarked Posts"
             />
             {linXPosts.map((post) => {
               if (post?.poster_bio?.includes("followers") || (showLiked && !likedPosts.includes(post?._id))) return null;

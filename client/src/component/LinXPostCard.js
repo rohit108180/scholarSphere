@@ -10,7 +10,7 @@ import Avatar from "@mui/material/Avatar";
 import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
 import { red } from "@mui/material/colors";
-import FavoriteIcon from "@mui/icons-material/Favorite";
+import BookmarkIcon from '@mui/icons-material/Bookmark';
 import ShareIcon from "@mui/icons-material/Share";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
@@ -123,8 +123,8 @@ export default function LinXPostCard({ post }) {
             className="like"
             onClick={() => toggleLinXLike(_id)}
           >
-
-            <FavoriteIcon className={ isLiked(_id) ? "liked" : null} />
+         
+            <BookmarkIcon className={ isLiked(_id) ? "liked" : null} />
 
             
           </IconButton>
