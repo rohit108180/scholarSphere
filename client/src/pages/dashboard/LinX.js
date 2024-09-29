@@ -8,7 +8,7 @@ import { track } from "../../usage-tracking";
 
 export const LinX = () => {
 
-  const {loadAllLinXPosts, linXPosts, saveLinXPost} = useAppcontext();
+  const {loadAllLinXPosts, linXPosts, saveLinXPost, displayAlert} = useAppcontext();
   const [postForm, setPostForm] = useState(false);
 
   const postSomethingSummaryRef = useRef(null);
@@ -19,7 +19,13 @@ export const LinX = () => {
   }
 
   const submitPost = async () =>{
-    track("Clicked post something button");
+    track("Clicked post something button",{link: postSomethingRef?.current?.value, summary : postSomethingSummaryRef?.current?.value});
+
+    if(!postSomethingSummaryRef?.current?.value && !postSomethingRef?.current?.value) {
+      displayAlert("Please add something", "warning")
+      track("Empty post");
+      return;
+    }
     let post = {
       poster: "Anonymous",
       summary: `A user added an opportunity : \n ${postSomethingSummaryRef.current.value}`,
