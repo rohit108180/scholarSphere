@@ -21,15 +21,16 @@ function App() {
       <MessageBar/>
     <BrowserRouter >
       <Routes>
-        {/* <Route path="/" element={<ProtectedRoute><SharedLayer/></ProtectedRoute>}>
-          <Route index element={<Feed/>} />
+        <Route path = "/" element={<LinX/>}/>
+        <Route path="/" element={<ProtectedRoute><SharedLayer/></ProtectedRoute>}>
+          {/* <Route index element={<Feed/>} /> */}
           <Route path='post' element={<AddProjectPaper/>} />
           <Route path='notifications' element={<Notifications/>} />
           <Route path='profile' element={<Profile/>} />
-        </Route> */}
-        {/* <Route path = "/register" element={<Register/>}/> */}
+        </Route>
+        <Route path = "/register" element={<Register/>}/>
         {/* <Route path = "/" element={<Landing/>}/> */}
-        <Route path = "/" element={<LinX/>}/>
+
         <Route path = "*" element={<Error/>}/>
 
       </Routes>

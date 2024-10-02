@@ -12,8 +12,8 @@ export const links = [
     },
     {
         id :2,
-        text:'Post',
-        path :'Create post',
+        text:'Create Post',
+        path :'post',
         icon : <MdQueryStats/>,
         locked: true
     },

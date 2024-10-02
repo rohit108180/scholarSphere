@@ -9,10 +9,10 @@ export const Navlinks = () => {
   const {displayAlert} = useAppcontext();
   function clickedLink(e, link) {
     track(`Clicked on navlink ${link?.text}`)
-    if (link?.locked){
-        e.preventDefault();
-        displayAlert("Feature coming soon", "info");
-    }
+    // if (link?.locked){
+    //     e.preventDefault();
+    //     displayAlert("Feature coming soon", "info");
+    // }
   }
   return (
     <div className="nav-links">

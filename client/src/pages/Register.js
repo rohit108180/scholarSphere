@@ -95,7 +95,7 @@ export const Register = () => {
             handleChange={handleChange}
             label = "Password"
           />
-{!values.isMember&&
+{false && !values.isMember&&
           <React.Fragment>
             <input
                 type="radio"
