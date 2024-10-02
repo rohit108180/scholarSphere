@@ -93,7 +93,7 @@ export default function LinXPostCard({ post }) {
         <CardContent>
           <Typography variant="body2" color="text.secondary">
           <b>Summary : </b>
-            {summary}
+            {summary}<p style={{color: "blue", cursor: "pointer"}} onClick={handleExpandClick}> see {expanded? "less" :"more" } </p>
           </Typography>
           <Stack direction="row" spacing={1} style={{marginTop:"1rem", width:"100%", flexWrap: "wrap"}}>
             {
